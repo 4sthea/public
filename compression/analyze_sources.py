@@ -217,7 +217,7 @@ def group_key(fs: FileStat) -> str:
     return fs.role
 
 
-def recommend_mode(file_count: int, source_tokens: int, estimated_output_tokens: int) -> Tuple[str, List[str]]:
+def recommend_mode(file_count: int, source_tokens: int, estimated_output_tokens: int) -> Tuple[str, List[str]]: # type: ignore
     reasons: List[str] = []
 
     if file_count == 0:
