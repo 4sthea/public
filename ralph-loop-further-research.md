@@ -257,7 +257,7 @@ And Copilot CLI now gives you the missing orchestration primitives around them:
 
 Do **not** put your **software-architect** into the inner Ralph loop on every pass.
 
-Your own CLASP/Ralph notes already point the right way: only **execution agents** are mechanically suited to Ralph-style verify/fix loops, while cognitive agents like Architect produce subjective output that is not directly verifiable the same way.
+Your own AI Ecosystem/Ralph notes already point the right way: only **execution agents** are mechanically suited to Ralph-style verify/fix loops, while cognitive agents like Architect produce subjective output that is not directly verifiable the same way.
 
 So the right loop is:
 
@@ -736,7 +736,7 @@ Use **interactive Copilot CLI**:
 
 Use the PowerShell loop above.
 
-That is the version most compatible with your CLASP style because it is:
+That is the version most compatible with your AI Ecosystem style because it is:
 
 - explicit
 - bounded
@@ -797,7 +797,7 @@ The best version for your setup is:
 
 That gets you the upside of Copilot CLI without turning your workflow into a tiny ministry of self-important agent paperwork.
 
-Some earlier uploaded files have expired on my side, so I grounded this setup in the agent files and summaries that were still available. Re-upload older governance files if you want me to turn this into a repo-exact CLASP artifact set with the precise filenames and folder conventions you’re using.
+Some earlier uploaded files have expired on my side, so I grounded this setup in the agent files and summaries that were still available. Re-upload older governance files if you want me to turn this into a repo-exact AI Ecosystem artifact set with the precise filenames and folder conventions you’re using.
 
 [1]: https://docs.github.com/en/copilot/concepts/agents/copilot-cli/autopilot "Allowing GitHub Copilot CLI to work autonomously - GitHub Docs"
 [2]: https://docs.github.com/en/copilot/how-tos/copilot-cli/speeding-up-task-completion "Speeding up task completion with the /fleet command - GitHub Docs"

@@ -2,9 +2,9 @@ Yes — and the corrected file changes the conclusion in an important way.
 
 ## Revised verdict
 
-**FACT:** Your current CLASP architecture is no longer “too many agents.” The corrected file defines **3 agents** with meaningful tool-based separation: `software-engineer` can edit and execute, while `code-reviewer` and `thinking-assistant` are read-only. That is broadly aligned with current VS Code / Copilot guidance, which says custom agents are appropriate when you need persistent configurations with distinct tools, model preferences, or handoffs.  ([Visual Studio Code][1])
+**FACT:** Your current AI Ecosystem architecture is no longer “too many agents.” The corrected file defines **3 agents** with meaningful tool-based separation: `software-engineer` can edit and execute, while `code-reviewer` and `thinking-assistant` are read-only. That is broadly aligned with current VS Code / Copilot guidance, which says custom agents are appropriate when you need persistent configurations with distinct tools, model preferences, or handoffs. ([Visual Studio Code][1])
 
-**FACT:** The stronger consolidation opportunity is now in the **instruction / prompt / procedure / skill layers**, not in the agent layer. Your file lists **16 instructions, 14 prompts, 3 procedures, and 2 skills**. Official Copilot docs support instructions, prompt files, custom agents, and skills as first-class customization types; I did **not** find “procedures” documented as a native Copilot customization primitive, which means your `*.procedure.md` layer is a repo convention rather than a platform-native one.  ([GitHub Docs][2])
+**FACT:** The stronger consolidation opportunity is now in the **instruction / prompt / procedure / skill layers**, not in the agent layer. Your file lists **16 instructions, 14 prompts, 3 procedures, and 2 skills**. Official Copilot docs support instructions, prompt files, custom agents, and skills as first-class customization types; I did **not** find “procedures” documented as a native Copilot customization primitive, which means your `*.procedure.md` layer is a repo convention rather than a platform-native one. ([GitHub Docs][2])
 
 ## The clean distinction, without hand-wavy fog
 
@@ -38,7 +38,7 @@ Examples: README generation workflow, tech-debt remediation workflow, security r
 
 ### Procedures
 
-**FACT:** Your CLASP file defines procedures as explicit playbooks with ordered steps and stop conditions. That is your system’s design, not a Copilot-native artifact type. 
+**FACT:** Your AI Ecosystem file defines procedures as explicit playbooks with ordered steps and stop conditions. That is your system’s design, not a Copilot-native artifact type.
 
 **OPINION:** Procedures are fine as internal documentation, but they are the first thing I would question when simplifying, because skills already exist precisely to package **workflow instructions + resources** without making them always-on. ([Visual Studio Code][5])
 
@@ -62,31 +62,31 @@ That single rule will save you from a lot of decorative markdown architecture.
 
 **FACT:** Your file already shows two families that look like bundled workflows:
 
-* `readme-gen` skill
-* `readme-generation.prompt.md`
-* `readme-generation.procedure.md`
-* `documentation.instructions.md`
-* `readme.template.md` 
+- `readme-gen` skill
+- `readme-generation.prompt.md`
+- `readme-generation.procedure.md`
+- `documentation.instructions.md`
+- `readme.template.md`
 
 and
 
-* `tech-debt` skill
-* `generate-tech-debt-analysis.prompt.md`
-* `tech-debt-review.procedure.md`
-* `tech-debt-fix.procedure.md`
-* `tech-debt-fix.instructions.md`
-* `tech-debt-review.instructions.md`
-* `tech-debt-analysis.template.md` 
+- `tech-debt` skill
+- `generate-tech-debt-analysis.prompt.md`
+- `tech-debt-review.procedure.md`
+- `tech-debt-fix.procedure.md`
+- `tech-debt-fix.instructions.md`
+- `tech-debt-review.instructions.md`
+- `tech-debt-analysis.template.md`
 
 **INFERENCE:** Those are the clearest places where you may have **workflow duplication across multiple artifact types**. In both cases, the skill already sounds like the natural bundle.
 
 **OPINION:** For each of those two domains, I would strongly consider a shape like this:
 
-* keep **one skill** as the reusable workflow bundle
-* keep **one thin prompt** only if you want a convenient slash-command-like entry point
-* remove the standalone procedure file unless it is also useful to humans outside Copilot
-* keep the template only if output structure really matters
-* keep the instruction file only if it contains reusable domain rules, not workflow steps
+- keep **one skill** as the reusable workflow bundle
+- keep **one thin prompt** only if you want a convenient slash-command-like entry point
+- remove the standalone procedure file unless it is also useful to humans outside Copilot
+- keep the template only if output structure really matters
+- keep the instruction file only if it contains reusable domain rules, not workflow steps
 
 That turns a little bureaucracy stack into one capability with a clean front door.
 
@@ -94,7 +94,7 @@ That turns a little bureaucracy stack into one capability with a clean front doo
 
 ## Where your current instruction philosophy is slightly off
 
-**FACT:** Your CLASP document defines instructions as “on-demand procedural knowledge files” and says they replaced many specialized agents. 
+**FACT:** Your AI Ecosystem document defines instructions as “on-demand procedural knowledge files” and says they replaced many specialized agents.
 
 **FACT:** Official docs frame custom instructions more narrowly: they are primarily for coding guidelines, standards, task/language-specific rules, and other scoped guidance; skills are the richer mechanism for specialized capabilities with scripts/resources and relevance-based loading. ([Visual Studio Code][3])
 
@@ -102,9 +102,9 @@ That turns a little bureaucracy stack into one capability with a clean front doo
 
 **OPINION:** A good smell test is this:
 
-* If the file mostly says **“prefer / avoid / follow / use”**, it is probably an instruction.
-* If the file mostly says **“first do X, then inspect Y, then produce Z, stop if…”**, it is drifting toward a skill or a prompt-backed workflow.
-* If it bundles examples, scripts, helper docs, or evaluation steps, it wants to be a skill.
+- If the file mostly says **“prefer / avoid / follow / use”**, it is probably an instruction.
+- If the file mostly says **“first do X, then inspect Y, then produce Z, stop if…”**, it is drifting toward a skill or a prompt-backed workflow.
+- If it bundles examples, scripts, helper docs, or evaluation steps, it wants to be a skill.
 
 ---
 
@@ -112,7 +112,7 @@ That turns a little bureaucracy stack into one capability with a clean front doo
 
 ### 1. Governance instructions
 
-**FACT:** Your file lists both `clasp-governance.instructions.md` and `governance.instructions.md`, both scoped to `.github/**`. 
+**FACT:** Your file lists both `AI Ecosystem-governance.instructions.md` and `governance.instructions.md`, both scoped to `.github/**`.
 
 **INFERENCE:** That is a potential overlap hotspot.
 
@@ -122,19 +122,19 @@ That turns a little bureaucracy stack into one capability with a clean front doo
 
 ### 2. README workflow
 
-**FACT:** You already have a dedicated README skill and also separate README prompt/procedure/template artifacts. 
+**FACT:** You already have a dedicated README skill and also separate README prompt/procedure/template artifacts.
 
 **OPINION:** This is the best candidate to simplify aggressively. One skill plus maybe one thin prompt is probably enough.
 
 ### 3. Tech debt workflow
 
-**FACT:** Same pattern: you already have a `tech-debt` skill plus separate prompt/procedure/instruction/template components. 
+**FACT:** Same pattern: you already have a `tech-debt` skill plus separate prompt/procedure/instruction/template components.
 
 **OPINION:** Same treatment. This wants to be one named capability, not a family reunion of markdown files.
 
 ### 4. Security review
 
-**FACT:** You currently list `security-review.instructions.md`, `generate-security-review.prompt.md`, and `security-review.template.md`. 
+**FACT:** You currently list `security-review.instructions.md`, `generate-security-review.prompt.md`, and `security-review.template.md`.
 
 **INFERENCE:** This can go either way.
 
@@ -142,7 +142,7 @@ That turns a little bureaucracy stack into one capability with a clean front doo
 
 ### 5. Research / planning workflows
 
-**FACT:** You list `generate-research-implementation-plan.prompt.md`, `architecture.instructions.md`, `refactor-plan.instructions.md`, and the `thinking-assistant` agent. 
+**FACT:** You list `generate-research-implementation-plan.prompt.md`, `architecture.instructions.md`, `refactor-plan.instructions.md`, and the `thinking-assistant` agent.
 
 **INFERENCE:** That cluster may be fine as-is, because planning tasks often benefit from explicit prompts and a read-only agent rather than a reusable skill bundle.
 
@@ -152,7 +152,7 @@ That turns a little bureaucracy stack into one capability with a clean front doo
 
 ## Why consolidation matters technically, not aesthetically
 
-**FACT:** Recent research shows that simply giving models more context can degrade reasoning, even when the relevant evidence is still retrievable. One 2025 EMNLP Findings paper found that input length alone hurt reasoning performance, even when the model could still retrieve the right evidence. A 2026 bug-fixing study found that long-context reasoning lagged agentic short-step decomposition on repository-scale tasks. 
+**FACT:** Recent research shows that simply giving models more context can degrade reasoning, even when the relevant evidence is still retrievable. One 2025 EMNLP Findings paper found that input length alone hurt reasoning performance, even when the model could still retrieve the right evidence. A 2026 bug-fixing study found that long-context reasoning lagged agentic short-step decomposition on repository-scale tasks.
 
 **FACT:** Anthropic’s context engineering guidance says context is finite and should be curated to the **smallest high-signal set** that helps the model behave correctly. ([anthropic.com][7])
 
@@ -170,37 +170,37 @@ Run every artifact through these five questions:
 
 Does it apply automatically, or only when you invoke it?
 
-* automatic → instruction
-* manual/on-demand → prompt or skill
+- automatic → instruction
+- manual/on-demand → prompt or skill
 
 ### 2. Scope
 
 Is it global, path-specific, task-specific, or capability-specific?
 
-* global/path-specific → instruction
-* task-specific → prompt
-* capability-specific → skill
+- global/path-specific → instruction
+- task-specific → prompt
+- capability-specific → skill
 
 ### 3. Autonomy/tooling
 
 Does it need different tools, permissions, model settings, or handoffs?
 
-* yes → agent
-* no → not an agent
+- yes → agent
+- no → not an agent
 
 ### 4. Resource bundle
 
 Does it need examples, scripts, helper docs, or a mini workflow pack?
 
-* yes → skill
-* no → prompt or instruction
+- yes → skill
+- no → prompt or instruction
 
 ### 5. Context cost
 
 Would loading this often help more than it harms?
 
-* yes, and broadly → instruction
-* no, only for certain tasks → skill or prompt
+- yes, and broadly → instruction
+- no, only for certain tasks → skill or prompt
 
 ---
 
@@ -208,20 +208,20 @@ Would loading this often help more than it harms?
 
 Use this and life gets less weird:
 
-* **Instruction** when the statement is:
+- **Instruction** when the statement is:
   “In this repo / file type / area, we do things this way.” ([Visual Studio Code][3])
 
-* **Prompt** when the statement is:
+- **Prompt** when the statement is:
   “Perform this specific task and return this shape of output.” ([Visual Studio Code][4])
 
-* **Agent** when the statement is:
+- **Agent** when the statement is:
   “Work in this operating mode with these tools and handoffs.” ([Visual Studio Code][1])
 
-* **Skill** when the statement is:
+- **Skill** when the statement is:
   “Here is a reusable specialist capability with supporting resources.” ([Visual Studio Code][5])
 
-* **Procedure** only when the statement is:
-  “Humans also need this playbook outside the AI customization system.” Otherwise, fold it into a skill or prompt-supporting doc. 
+- **Procedure** only when the statement is:
+  “Humans also need this playbook outside the AI customization system.” Otherwise, fold it into a skill or prompt-supporting doc.
 
 ---
 
@@ -230,9 +230,9 @@ Use this and life gets less weird:
 ### Keep
 
 **OPINION:**
-Keep the **3-agent** setup. It is now sane and matches tool-boundary logic well.  ([Visual Studio Code][1])
+Keep the **3-agent** setup. It is now sane and matches tool-boundary logic well. ([Visual Studio Code][1])
 
-Keep stack instructions like `stack-python.instructions.md`, `stack-react.instructions.md`, and `stack-database.instructions.md` **if** they are concise and mostly conventions. That is exactly what scoped instructions are good at.  ([Visual Studio Code][3])
+Keep stack instructions like `stack-python.instructions.md`, `stack-react.instructions.md`, and `stack-database.instructions.md` **if** they are concise and mostly conventions. That is exactly what scoped instructions are good at. ([Visual Studio Code][3])
 
 ### Challenge
 
@@ -255,17 +255,17 @@ Challenge overlapping governance files on the same scope.
 
 ## Bottom line
 
-**FACT:** With the corrected file, your agent layer is in pretty good shape. The likely overengineering is now in the **workflow artifacts**, especially where you have **skill + prompt + procedure + instruction + template** all orbiting the same job. 
+**FACT:** With the corrected file, your agent layer is in pretty good shape. The likely overengineering is now in the **workflow artifacts**, especially where you have **skill + prompt + procedure + instruction + template** all orbiting the same job.
 
 **OPINION:** Yes, some of your instruction files and/or prompts and/or procedures should probably be consolidated into **skills**. The best candidates are the workflow-heavy families you already partially bundled: **README** and **tech debt** first, then possibly **security review** if you want richer resources and reusable steps.
 
 **OPINION:** The target shape I’d aim for is:
 
-* keep **3 agents**
-* keep concise, path-scoped instructions
-* use prompt files for genuinely common one-shot tasks
-* use skills for multi-file, reusable workflows with resources
-* shrink or eliminate standalone procedures unless humans need them too
+- keep **3 agents**
+- keep concise, path-scoped instructions
+- use prompt files for genuinely common one-shot tasks
+- use skills for multi-file, reusable workflows with resources
+- shrink or eliminate standalone procedures unless humans need them too
 
 Upload the actual `*.instructions.md`, `*.prompt.md`, `*.procedure.md`, and `SKILL.md` files, and I’ll turn this into a **keep / merge / rewrite-as-skill / delete** matrix with no guessing.
 
@@ -274,6 +274,6 @@ Upload the actual `*.instructions.md`, `*.prompt.md`, `*.procedure.md`, and `SKI
 [3]: https://code.visualstudio.com/docs/copilot/customization/custom-instructions "Use custom instructions in VS Code"
 [4]: https://code.visualstudio.com/docs/copilot/customization/prompt-files "Use prompt files in VS Code"
 [5]: https://code.visualstudio.com/docs/copilot/customization/agent-skills "Use Agent Skills in VS Code"
-[6]: https://www.anthropic.com/research/building-effective-agents "Building Effective AI Agents \ Anthropic"
-[7]: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents "Effective context engineering for AI agents \ Anthropic"
+[6]: https://www.anthropic.com/research/building-effective-agents "Building Effective AI Agents \\ Anthropic"
+[7]: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents "Effective context engineering for AI agents \\ Anthropic"
 [8]: https://www.reddit.com/r/GithubCopilot/comments/1ncz4r3/chat_modesprompt_files_confusion/ "Chat Modes/Prompt files confusion : r/GithubCopilot"

@@ -1,25 +1,23 @@
-Specification: LLM-First CLASP Restructuring for VS Code Agents
+Specification: LLM-First AI Ecosystem Restructuring for VS Code Agents
 
 1. Architectural Transition: From 7-Layer Sprawl to Monolithic Skills
 
-Architectural Mandate: We are standardizing the transition from the legacy 7-layer taxonomy of CLASP (Constitution, Enforcement, Cognition, Procedure, Wiring, Structure, and Context) into a streamlined, LLM-first architecture of Monolithic Skills. This restructuring optimizes agent performance by reducing context sprawl while maintaining the epistemic rigor required to prevent "laundry uncertainty"—where an agent hides gaps in knowledge behind confident phrasing.
+Architectural Mandate: We are standardizing the transition from the legacy 7-layer taxonomy of AI Ecosystem (Constitution, Enforcement, Cognition, Procedure, Wiring, Structure, and Context) into a streamlined, LLM-first architecture of Monolithic Skills. This restructuring optimizes agent performance by reducing context sprawl while maintaining the epistemic rigor required to prevent "laundry uncertainty"—where an agent hides gaps in knowledge behind confident phrasing.
 
-While most layers collapse into skill-specific directories, the Structure (*.template.md) layer must remain a rigid, immutable skeleton. This ensures that the agent cannot deviate from the defined interface or invent content where evidence is missing; an empty section under a heading is the only acceptable output for missing context.
+While most layers collapse into skill-specific directories, the Structure (\*.template.md) layer must remain a rigid, immutable skeleton. This ensures that the agent cannot deviate from the defined interface or invent content where evidence is missing; an empty section under a heading is the only acceptable output for missing context.
 
 Transformation Mapping Table
 
-Legacy CLASP Layer	New Monolithic Location	Functional Responsibility
-Constitution	/.github/copilot-instructions.md	Supreme epistemic laws: truth > helpfulness > speed.
-Enforcement	/.github/verification-checklist.md	Canonical pass/fail gates and evidence-gathering rules.
-Cognition	/.github/skills/{skill-name}/*.agent.md	Specialist reasoning posture and authorized domain limits.
-Procedures	/.github/skills/{skill-name}/*.procedure.md	Explicit execution playbooks and change-propagation steps.
-Wiring	/.github/skills/{skill-name}/*.prompt.md	Task-level tool selection and output shape definitions.
-Structure	/.github/templates/*.template.md	Rigid interfaces; enforces "Unknown" over fabrication.
-Context	/.github/skills/{skill-name}/resources/	Read-only domain grounding and component catalogs.
+Legacy AI Ecosystem Layer New Monolithic Location Functional Responsibility
+Constitution /.github/copilot-instructions.md Supreme epistemic laws: truth > helpfulness > speed.
+Enforcement /.github/verification-checklist.md Canonical pass/fail gates and evidence-gathering rules.
+Cognition /.github/skills/{skill-name}/_.agent.md Specialist reasoning posture and authorized domain limits.
+Procedures /.github/skills/{skill-name}/_.procedure.md Explicit execution playbooks and change-propagation steps.
+Wiring /.github/skills/{skill-name}/_.prompt.md Task-level tool selection and output shape definitions.
+Structure /.github/templates/_.template.md Rigid interfaces; enforces "Unknown" over fabrication.
+Context /.github/skills/{skill-name}/resources/ Read-only domain grounding and component catalogs.
 
-
---------------------------------------------------------------------------------
-
+---
 
 2. The Monolithic Skill Folder Specification
 
@@ -35,13 +33,11 @@ Skill Integration Logic: The "Referenced ≠ Read" Safeguard
 
 To eliminate the primary vector for hallucination—where an agent claims to follow a playbook it never actually loaded—all skill integrations must enforce the following logic:
 
-* Explicit Invocation: The agent must attempt to read the procedure file at the start of any task.
-* Hard Stop Condition: If a procedure or context file is unreadable or missing, the agent MUST STOP and request the input verbatim from the user. It is strictly prohibited from guessing or approximating steps.
-* Discovery: Skills must be configured for the @ (agent mention) and / (slash command) registries, ensuring specialists like @designer or /refactor load only the required context.
+- Explicit Invocation: The agent must attempt to read the procedure file at the start of any task.
+- Hard Stop Condition: If a procedure or context file is unreadable or missing, the agent MUST STOP and request the input verbatim from the user. It is strictly prohibited from guessing or approximating steps.
+- Discovery: Skills must be configured for the @ (agent mention) and / (slash command) registries, ensuring specialists like @designer or /refactor load only the required context.
 
-
---------------------------------------------------------------------------------
-
+---
 
 3. Orchestrator/Sub-Agent Hierarchy Configuration
 
@@ -49,25 +45,23 @@ The Orchestrator Role (Logistics/PM Only)
 
 The Orchestrator functions as a technical PM. It manages the mission but never touches the code.
 
-* Constraint: The Orchestrator must operate under a strict Anti-Helpfulness Rule. It is authorized only to decompose requests, delegate to specialists, and coordinate results.
-* Rationalization: Models "want" to be helpful and often attempt to implement code themselves. The Orchestrator must be prohibited from providing implementation lines to sub-agents to prevent authority leakage.
+- Constraint: The Orchestrator must operate under a strict Anti-Helpfulness Rule. It is authorized only to decompose requests, delegate to specialists, and coordinate results.
+- Rationalization: Models "want" to be helpful and often attempt to implement code themselves. The Orchestrator must be prohibited from providing implementation lines to sub-agents to prevent authority leakage.
 
 Model Selection Rationale
 
-* Orchestrator: Claude 3.5 Sonnet. Chosen for its high agency and "eager Labrador" energy. It is excellent at following complex logistics but is outclassed in implementation precision.
-* Planner & Coder: GPT-4o / Codex. Prescribed for logic-heavy task breakdown and superior "coding chops." These models handle the implementation work delegated by Sonnet.
-* Designer: Gemini 1.5 Pro. Utilized specifically for UI/UX aesthetics and styling, where it consistently outperforms other frontier models.
+- Orchestrator: Claude 3.5 Sonnet. Chosen for its high agency and "eager Labrador" energy. It is excellent at following complex logistics but is outclassed in implementation precision.
+- Planner & Coder: GPT-4o / Codex. Prescribed for logic-heavy task breakdown and superior "coding chops." These models handle the implementation work delegated by Sonnet.
+- Designer: Gemini 1.5 Pro. Utilized specifically for UI/UX aesthetics and styling, where it consistently outperforms other frontier models.
 
 Context Isolation: The "Magic of Sub-agents"
 
 To support massive code generation (e.g., 2,700+ lines) without bloating the primary conversation, the Orchestrator must use the Agent Tool to spawn sub-agents in isolated windows.
 
-* Isolation Protocol: Sub-agents consume their own context windows. Only final artifacts and success/fail statuses are returned to the Orchestrator.
-* Metric: This protocol allows the project to scale infinitely; a sub-agent can process 100k tokens of research while the Orchestrator’s context window remains lean (e.g., under 11K tokens).
+- Isolation Protocol: Sub-agents consume their own context windows. Only final artifacts and success/fail statuses are returned to the Orchestrator.
+- Metric: This protocol allows the project to scale infinitely; a sub-agent can process 100k tokens of research while the Orchestrator’s context window remains lean (e.g., under 11K tokens).
 
-
---------------------------------------------------------------------------------
-
+---
 
 4. Implementation of the Ralph Loop (Verification)
 
@@ -87,13 +81,11 @@ Automated Verification Hooks
 
 Configure VS Code Hooks to trigger the Ralph Loop at key lifecycle points:
 
-* Hook Trigger: post-tool-use or session-stop.
-* Action: Automatically run a validation script that forces the agent to document its findings in an Evidence Ledger.
-* Epistemic Rule: If the browser cannot render the page or a log is missing, the agent must report "Unknown" rather than "Success."
+- Hook Trigger: post-tool-use or session-stop.
+- Action: Automatically run a validation script that forces the agent to document its findings in an Evidence Ledger.
+- Epistemic Rule: If the browser cannot render the page or a log is missing, the agent must report "Unknown" rather than "Success."
 
-
---------------------------------------------------------------------------------
-
+---
 
 5. Multi-Agent Session Management & Infrastructure
 
@@ -105,34 +97,32 @@ Operational Isolation via Git Worktrees
 
 For Background Mode tasks, agents must utilize Git Worktrees.
 
-* Why: Unlike simple branching, Worktrees allow agents to work in isolated workspaces on different branches without taking over the developer's active working directory or requiring manual repo clones. This prevents file-system collisions during parallel execution.
+- Why: Unlike simple branching, Worktrees allow agents to work in isolated workspaces on different branches without taking over the developer's active working directory or requiring manual repo clones. This prevents file-system collisions during parallel execution.
 
 The Sentence Species Model (Five-Second Classifier)
 
 To maintain monolithic instruction integrity, apply the Sentence Species Model. Every sentence in a skill's instruction block must be categorized and separated:
 
-* Style (Voice): Tone and readability (e.g., "Use a professional, architect's tone").
-* Teaching (Understanding): Analogies and explanations to help the agent reason.
-* Enforcement (Compliance): Pass/fail gates (e.g., "Stop if required context is unreadable").
-* Procedure (Steps): Ordered playbooks and propagation passes.
-* Wiring (Mechanical): Paths to templates, tools, and output formats.
+- Style (Voice): Tone and readability (e.g., "Use a professional, architect's tone").
+- Teaching (Understanding): Analogies and explanations to help the agent reason.
+- Enforcement (Compliance): Pass/fail gates (e.g., "Stop if required context is unreadable").
+- Procedure (Steps): Ordered playbooks and propagation passes.
+- Wiring (Mechanical): Paths to templates, tools, and output formats.
 
-
---------------------------------------------------------------------------------
-
+---
 
 6. Integrity and Deployment Checklist
 
-Upon completion of the CLASP-to-Monolithic transition, the agent must generate a Model Report Card verifying the following:
+Upon completion of the AI Ecosystem-to-Monolithic transition, the agent must generate a Model Report Card verifying the following:
 
-Task Component	Architectural Success Criteria
-Orchestrator Delegation	Orchestrator successfully delegates to parallel sub-agents without writing code.
-Skill Loading	The Monolithic Skill folder is loaded on-demand via slash command/mention.
-Referenced ≠ Read	Agent triggers a "Hard Stop" when a required procedure file is removed.
-Ralph Loop Execution	Agent Browser Skill captures visual evidence and logs of the implementation.
-Worktree Isolation	Background agents operate in distinct worktrees with zero HEAD collisions.
-Epistemic Honesty	The agent returns "Unknown" when context is withheld (Silence as Success).
-Evidence Ledger	Every claim in the final artifact is mapped to a quote from the source code.
+Task Component Architectural Success Criteria
+Orchestrator Delegation Orchestrator successfully delegates to parallel sub-agents without writing code.
+Skill Loading The Monolithic Skill folder is loaded on-demand via slash command/mention.
+Referenced ≠ Read Agent triggers a "Hard Stop" when a required procedure file is removed.
+Ralph Loop Execution Agent Browser Skill captures visual evidence and logs of the implementation.
+Worktree Isolation Background agents operate in distinct worktrees with zero HEAD collisions.
+Epistemic Honesty The agent returns "Unknown" when context is withheld (Silence as Success).
+Evidence Ledger Every claim in the final artifact is mapped to a quote from the source code.
 
 Mandatory Final Verification:
 

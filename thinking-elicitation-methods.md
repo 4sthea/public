@@ -1,22 +1,22 @@
-# Feature Specification — CLASP Advanced Elicitation Integration
+# Feature Specification — AI Ecosystem Advanced Elicitation Integration
 
 ## Document Control
 
 - **Document Type:** Feature Specification
 - **Status:** Proposed
 - **Mode:** Epistemic
-- **Target System:** CLASP ecosystem in VS Code with GitHub Copilot
+- **Target System:** AI Ecosystem ecosystem in VS Code with GitHub Copilot
 - **Feature Name:** Advanced Elicitation Integration
 - **Short Name:** AEI
 - **Primary Objective:** Enhance CLASP’s existing multi-perspective orchestration and thinking workflow with structured second-pass critique using named elicitation methods
-- **Intended Audience:** CLASP maintainers, prompt/agent authors, workflow designers
+- **Intended Audience:** AI Ecosystem maintainers, prompt/agent authors, workflow designers
 - **Primary Beneficiaries:** `thinking-assistant`, `sparring-orchestrator`, and any workflow that currently produces a synthesized recommendation
 
 ---
 
 ## 1. Summary
 
-This feature adds a CLASP-native advanced elicitation capability to improve the quality, depth, and robustness of idea evaluation, planning, architecture analysis, and strategy synthesis.
+This feature adds a AI Ecosystem-native advanced elicitation capability to improve the quality, depth, and robustness of idea evaluation, planning, architecture analysis, and strategy synthesis.
 
 The enhancement introduces a structured post-synthesis critique stage that applies one or more named elicitation methods to an already-generated answer, recommendation, or synthesis.
 
@@ -45,7 +45,7 @@ Instead, it introduces one reusable capability that can be invoked:
 
 - inside `thinking-assistant`
 - after synthesis in `sparring-orchestrator`
-- optionally in other CLASP workflows that benefit from deeper second-pass reasoning
+- optionally in other AI Ecosystem workflows that benefit from deeper second-pass reasoning
 
 ---
 
@@ -85,7 +85,7 @@ the system can produce strong first-pass reasoning, but it lacks a reusable, exp
 
 ### 3.1 Functional Goals
 
-1. Introduce a reusable advanced elicitation capability into CLASP.
+1. Introduce a reusable advanced elicitation capability into AI Ecosystem.
 2. Allow a generated answer or synthesis to be re-examined using a named analytical method.
 3. Improve the quality of outputs from `thinking-assistant`.
 4. Improve the robustness of `sparring-orchestrator` outputs by adding a post-synthesis challenge pass.
@@ -94,7 +94,7 @@ the system can produce strong first-pass reasoning, but it lacks a reusable, exp
 7. Produce explicit deltas showing what changed after elicitation.
 8. Preserve user inspectability and bounded reasoning.
 
-### 3.2 CLASP Alignment Goals
+### 3.2 AI Ecosystem Alignment Goals
 
 1. Preserve CLASP’s broad-agent architecture.
 2. Avoid reintroducing many specialist “thinking lens” agents.
@@ -175,7 +175,7 @@ As a user, I want hidden assumptions in my idea or plan to be surfaced explicitl
 
 ### 6.4 Controlled Depth
 
-As a CLASP maintainer, I want deeper analysis without adding many new agents so that the system stays maintainable and aligned with CLASP v3.
+As a AI Ecosystem maintainer, I want deeper analysis without adding many new agents so that the system stays maintainable and aligned with AI Ecosystem v3.
 
 ---
 
@@ -750,7 +750,7 @@ This is the recommended general mode.
 
 | Artifact                                    | Responsibility                                                           | Must NOT Own                                       |
 | ------------------------------------------- | ------------------------------------------------------------------------ | -------------------------------------------------- |
-| `advanced-elicitation/SKILL.md`             | reusable workflow packaging, entry points, examples, artifact references | global CLASP rules                                 |
+| `advanced-elicitation/SKILL.md`             | reusable workflow packaging, entry points, examples, artifact references | global AI Ecosystem rules                          |
 | `advanced-elicitation.procedure.md`         | ordered elicitation flow, selection/execution steps, stop conditions     | agent identity, global policy                      |
 | `advanced-elicitation.instructions.md`      | reusable elicitation guidance, method use rules, selection heuristics    | workflow ownership, template structure             |
 | `elicitation-methods.csv`                   | method registry and metadata                                             | live reasoning, policy                             |
@@ -838,7 +838,7 @@ Adding more permanent lenses would:
 - increase agent complexity
 - add maintenance burden
 - blur the line between perspective and reasoning method
-- move CLASP back toward specialized-agent sprawl
+- move AI Ecosystem back toward specialized-agent sprawl
 
 Adding one elicitation stage instead:
 
@@ -876,7 +876,7 @@ Then it applies the method and returns only the meaningful delta.
 
 ## 24.1 Functional Acceptance
 
-1. A reusable advanced elicitation capability exists as a CLASP skill and/or procedure-backed workflow.
+1. A reusable advanced elicitation capability exists as a AI Ecosystem skill and/or procedure-backed workflow.
 2. `thinking-assistant` can invoke it when appropriate.
 3. `sparring-orchestrator` can invoke it after synthesis.
 4. The system can select one method dynamically based on context.
@@ -884,10 +884,10 @@ Then it applies the method and returns only the meaningful delta.
 6. The output includes a delta and whether the recommendation changed.
 7. The feature supports at least 6–8 high-value methods initially.
 
-## 24.2 CLASP Acceptance
+## 24.2 AI Ecosystem Acceptance
 
 1. No new family of visible specialist elicitation agents is introduced.
-2. The feature does not violate broad-agent CLASP architecture.
+2. The feature does not violate broad-agent AI Ecosystem architecture.
 3. Workflow logic primarily lives in skill/procedure artifacts.
 4. Method metadata lives outside the agent definitions.
 5. Uncertainty remains explicit.
@@ -922,7 +922,7 @@ The feature is successful if:
 | method selection feels arbitrary          | weak trust                          | always expose selection reason                      |
 | system overuses elicitation               | analysis inflation                  | define clear trigger and non-trigger conditions     |
 | multiple methods create overlap           | noise and redundancy                | default to one method, bounded second pass only     |
-| new lens agents proliferate               | CLASP regression                    | forbid method-per-agent pattern                     |
+| new lens agents proliferate               | AI Ecosystem regression             | forbid method-per-agent pattern                     |
 | method output becomes verbose restatement | low value                           | require delta-centric reporting                     |
 | elicitation is used on trivial tasks      | wasted time                         | restrict by trigger rules                           |
 | elicitation is mistaken for verification  | false confidence                    | keep output framed as improved reasoning, not proof |
@@ -1058,6 +1058,6 @@ The best first version is:
 - post-synthesis
 - dynamic
 - delta-driven
-- CLASP-compatible
+- AI Ecosystem-compatible
 
-That gives you the real value of BMAD’s advanced elicitation model without undermining the architectural discipline you already established in CLASP.
+That gives you the real value of BMAD’s advanced elicitation model without undermining the architectural discipline you already established in AI Ecosystem.

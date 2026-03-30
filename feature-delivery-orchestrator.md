@@ -1,21 +1,21 @@
-# Feature Specification — CLASP Feature Delivery Orchestrator
+# Feature Specification — AI Ecosystem Feature Delivery Orchestrator
 
 ## Document Control
 
 - **Document Type:** Feature Specification
 - **Status:** Proposed
 - **Mode:** Epistemic
-- **Target System:** CLASP ecosystem in VS Code with GitHub Copilot
+- **Target System:** AI Ecosystem ecosystem in VS Code with GitHub Copilot
 - **Feature Name:** Feature Delivery Orchestrator
 - **Short Name:** FDO
 - **Primary Outcome:** Enable one orchestrator to drive a bounded implementation lifecycle from feature specification to implementation, verification, review, remediation, and final completion
-- **Intended Audience:** CLASP maintainers, prompt/agent authors, workflow designers
+- **Intended Audience:** AI Ecosystem maintainers, prompt/agent authors, workflow designers
 
 ---
 
 ## 1. Summary
 
-The Feature Delivery Orchestrator is a CLASP-native orchestration capability for implementing a feature specification through a controlled multi-phase lifecycle.
+The Feature Delivery Orchestrator is a AI Ecosystem-native orchestration capability for implementing a feature specification through a controlled multi-phase lifecycle.
 
 It is designed to:
 
@@ -31,7 +31,7 @@ It is designed to:
 
 The orchestrator is not a new “god agent.”
 
-It is a coordination layer that sits above the existing CLASP agents and relies on:
+It is a coordination layer that sits above the existing AI Ecosystem agents and relies on:
 
 - existing broad agents
 - explicit procedures
@@ -53,7 +53,7 @@ This feature preserves CLASP’s v3 design principles:
 
 ## 2. Problem Statement
 
-CLASP currently supports planning, implementation, code review, and reusable skills, but these are still mostly invoked as separate capabilities.
+AI Ecosystem currently supports planning, implementation, code review, and reusable skills, but these are still mostly invoked as separate capabilities.
 
 The missing capability is a reusable lifecycle coordinator that can take a feature specification and drive the full development loop:
 
@@ -97,9 +97,9 @@ That causes:
 7. Loop only on blocking failures or unresolved required work.
 8. Produce a final completion summary with evidence of checks run and residual concerns.
 
-### 3.2 CLASP Alignment Goals
+### 3.2 AI Ecosystem Alignment Goals
 
-1. Preserve the three-agent CLASP model instead of reintroducing many visible specialist agents.
+1. Preserve the three-agent AI Ecosystem model instead of reintroducing many visible specialist agents.
 2. Keep lifecycle logic in a procedure/skill rather than bloating agent files.
 3. Preserve single ownership:
    - agents own cognitive posture
@@ -122,7 +122,7 @@ That causes:
 
 ## 4. Non-Goals
 
-1. Replacing the current CLASP three-agent architecture.
+1. Replacing the current AI Ecosystem three-agent architecture.
 2. Turning the orchestrator into a direct code-editing agent.
 3. Allowing uncontrolled recursive subagent graphs.
 4. Guaranteeing complete autonomous delivery for every feature.
@@ -173,9 +173,9 @@ As a developer, I want to give a feature specification to one orchestrator and h
 
 As a maintainer, I want review findings to be routed back into implementation in a structured and minimal way so the system converges instead of rewriting blindly.
 
-### 6.3 CLASP Governance
+### 6.3 AI Ecosystem Governance
 
-As a CLASP maintainer, I want this capability implemented without violating single ownership and without reintroducing specialized-agent sprawl.
+As a AI Ecosystem maintainer, I want this capability implemented without violating single ownership and without reintroducing specialized-agent sprawl.
 
 ### 6.4 Safe Failure
 
@@ -188,7 +188,7 @@ As a user, I want the system to stop honestly when evidence is missing, checks a
 ### In Scope
 
 - one visible lifecycle orchestrator agent
-- reuse of existing broad CLASP agents
+- reuse of existing broad AI Ecosystem agents
 - lifecycle procedure
 - feature-delivery skill
 - normalized review findings
@@ -209,7 +209,7 @@ As a user, I want the system to stop honestly when evidence is missing, checks a
 
 ---
 
-## 8. Proposed CLASP Artifact Architecture
+## 8. Proposed AI Ecosystem Artifact Architecture
 
 ## 8.1 Recommended New Artifacts
 
@@ -231,7 +231,7 @@ Minimal recommended first version:
 - existing stack instructions
 - existing test strategy instructions
 - existing code review skill or review instructions
-- existing governance and CLASP instructions
+- existing governance and AI Ecosystem instructions
 
 ---
 
@@ -272,7 +272,7 @@ Responsibilities:
 Constraints:
 
 - must not edit files directly
-- must not run arbitrary implementation itself if CLASP keeps edit authority solely with `software-engineer`
+- must not run arbitrary implementation itself if AI Ecosystem keeps edit authority solely with `software-engineer`
 - must not embed all lifecycle logic in the agent file
 - must not reinterpret non-blocking findings as blocking without evidence
 - must not suppress unknowns or failed checks
@@ -806,7 +806,7 @@ The prompt must:
 
 ## 17.3 Procedure Must NOT Include
 
-- global CLASP governance
+- global AI Ecosystem governance
 - agent definitions
 - hardcoded repo-specific facts unless parameterized
 - template structure
@@ -821,7 +821,7 @@ The prompt must:
 
 ## 18.2 Skill Responsibility
 
-Package the lifecycle capability into a reusable CLASP workflow that can bundle:
+Package the lifecycle capability into a reusable AI Ecosystem workflow that can bundle:
 
 - lifecycle instructions
 - lifecycle procedure
@@ -841,7 +841,7 @@ It is a reusable lifecycle capability with:
 - evolving examples
 - likely future expansion
 
-That fits the CLASP skill model better than hiding everything in a prompt or agent.
+That fits the AI Ecosystem skill model better than hiding everything in a prompt or agent.
 
 ---
 
@@ -881,7 +881,7 @@ That fits the CLASP skill model better than hiding everything in a prompt or age
     agents: ['software-engineer', 'code-reviewer', 'thinking-assistant']
     ---
 
-    You are a lifecycle coordinator for CLASP.
+    You are a lifecycle coordinator for AI Ecosystem.
 
     Your responsibilities:
     - determine whether full lifecycle orchestration is appropriate
@@ -1003,17 +1003,17 @@ The lifecycle may mark a feature as complete only when all of the following are 
 ## 25.1 Functional Acceptance
 
 1. A user can invoke one visible orchestrator with a feature specification.
-2. The orchestrator can call the existing three broad CLASP agents as needed.
+2. The orchestrator can call the existing three broad AI Ecosystem agents as needed.
 3. The orchestrator can execute or trigger verification between implementation and review.
 4. The orchestrator can process normalized review findings.
 5. The orchestrator can loop through remediation at least once.
 6. The orchestrator can produce a final lifecycle report.
 
-## 25.2 CLASP Acceptance
+## 25.2 AI Ecosystem Acceptance
 
 1. No lifecycle procedure logic is duplicated into the constitution.
 2. No verification policy is embedded into worker agents.
-3. The orchestrator does not become a direct editing super-agent unless CLASP explicitly changes that rule.
+3. The orchestrator does not become a direct editing super-agent unless AI Ecosystem explicitly changes that rule.
 4. Existing agent boundaries remain meaningful.
 5. The feature adds minimal visible-agent surface.
 
@@ -1035,7 +1035,7 @@ The lifecycle may mark a feature as complete only when all of the following are 
 | Implementation rewrites too much during remediation | drift, new bugs                      | constrain remediation to blocking findings only               |
 | Loop repeats endlessly                              | wasted time, false confidence        | hard iteration caps and anti-thrashing rules                  |
 | Worker agents start owning lifecycle policy         | boundary erosion                     | keep stop decisions in orchestrator only                      |
-| Too many new specialist agents are added            | CLASP regression                     | reuse existing 3 broad agents and instructions                |
+| Too many new specialist agents are added            | AI Ecosystem regression              | reuse existing 3 broad agents and instructions                |
 | Verification is expensive                           | slow iteration                       | support slice-bounded verification modes                      |
 | Human decisions get buried                          | false autonomy                       | explicit `needs-human-decision` category                      |
 
@@ -1151,7 +1151,7 @@ expand only after the minimal lifecycle is reliable
 ## 30. Explicit Design Decisions
 
 1. The orchestrator is a coordinator, not a coder.
-2. Existing broad CLASP agents are reused rather than replaced.
+2. Existing broad AI Ecosystem agents are reused rather than replaced.
 3. Lifecycle logic lives in procedure/skill artifacts.
 4. Review findings must be normalized to enable remediation.
 5. Verification must occur before completion.
@@ -1189,6 +1189,6 @@ The first version should optimize for:
 - convergence
 - observability
 - bounded scope
-- CLASP compatibility
+- AI Ecosystem compatibility
 
 rather than maximum automation.

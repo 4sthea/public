@@ -1,21 +1,21 @@
-# Feature Specification — CLASP Multi-Perspective Orchestration for GitHub Copilot in VS Code
+# Feature Specification — AI Ecosystem Multi-Perspective Orchestration for GitHub Copilot in VS Code
 
 ## Document Control
 
-- **Feature Name:** CLASP Multi-Perspective Orchestration
-- **Short Name:** CLASP MPO
+- **Feature Name:** AI Ecosystem Multi-Perspective Orchestration
+- **Short Name:** AI Ecosystem MPO
 - **Status:** Proposed
 - **Mode:** Epistemic
-- **Primary Goal:** Add a minimal, CLASP-compatible way to orchestrate multiple bounded perspectives in Copilot Chat without reintroducing specialized-agent sprawl
-- **Primary Audience:** CLASP maintainers, GitHub Copilot custom-agent authors, VS Code workflow designers
+- **Primary Goal:** Add a minimal, AI Ecosystem-compatible way to orchestrate multiple bounded perspectives in Copilot Chat without reintroducing specialized-agent sprawl
+- **Primary Audience:** AI Ecosystem maintainers, GitHub Copilot custom-agent authors, VS Code workflow designers
 
 ---
 
 ## 1. Summary
 
-CLASP currently consolidates cognition into 3 broad agents and pushes specialized expertise into instructions, prompts, procedures, templates, and context artifacts. This feature adds a new orchestration capability that lets one CLASP coordinator agent invoke 2–4 bounded worker perspectives as Copilot subagents and then synthesize the result into one structured answer.
+AI Ecosystem currently consolidates cognition into 3 broad agents and pushes specialized expertise into instructions, prompts, procedures, templates, and context artifacts. This feature adds a new orchestration capability that lets one AI Ecosystem coordinator agent invoke 2–4 bounded worker perspectives as Copilot subagents and then synthesize the result into one structured answer.
 
-This feature is intended to capture the useful part of "party mode" while staying compatible with CLASP v3:
+This feature is intended to capture the useful part of "party mode" while staying compatible with AI Ecosystem v3:
 
 - keep the visible agent surface small
 - avoid persona theater
@@ -33,20 +33,20 @@ It must not become:
 
 - a return to 16+ specialized first-class agents
 - freeform roleplay
-- a mechanism for bypassing CLASP verification rules
+- a mechanism for bypassing AI Ecosystem verification rules
 - a vague "everyone talks" workflow without deterministic orchestration
 
 ---
 
 ## 2. Problem Statement
 
-CLASP v3 deliberately reduced the maintenance burden by consolidating many specialized agents into 3 broad agents and moving expertise into instruction files. That solved maintenance and authority-sprawl problems, but it also removed an ergonomic pattern that can be useful in some tasks: explicit multi-perspective contention.
+AI Ecosystem v3 deliberately reduced the maintenance burden by consolidating many specialized agents into 3 broad agents and moving expertise into instruction files. That solved maintenance and authority-sprawl problems, but it also removed an ergonomic pattern that can be useful in some tasks: explicit multi-perspective contention.
 
 Current gap:
 
-- CLASP can already do planning and review
-- CLASP can already use instructions instead of specialist agents
-- CLASP does not yet have a clean, reusable way to force structured disagreement across perspectives inside Copilot Chat
+- AI Ecosystem can already do planning and review
+- AI Ecosystem can already use instructions instead of specialist agents
+- AI Ecosystem does not yet have a clean, reusable way to force structured disagreement across perspectives inside Copilot Chat
 
 Example gap:
 
@@ -79,7 +79,7 @@ Today this can be approximated ad hoc in a prompt, but that is fragile and incon
    - unresolved questions
    - recommended next step
 
-### 3.2 CLASP Goals
+### 3.2 AI Ecosystem Goals
 
 1. Preserve the v3 consolidation principle.
 2. Keep domain expertise in instructions, not in a growing roster of visible specialized agents.
@@ -111,7 +111,7 @@ Today this can be approximated ad hoc in a prompt, but that is fragile and incon
 2. Reintroducing many first-class specialized visible agents.
 3. Creating a recursive subagent graph by default.
 4. Using orchestration for implementation-by-default.
-5. Replacing existing CLASP prompts, procedures, or verification with agent chatter.
+5. Replacing existing AI Ecosystem prompts, procedures, or verification with agent chatter.
 6. Claiming runtime enforcement that does not exist.
 
 ---
@@ -120,7 +120,7 @@ Today this can be approximated ad hoc in a prompt, but that is fragile and incon
 
 ### 5.1 Planning
 
-As a developer, I want one CLASP agent to challenge a feature idea from multiple angles so that I see the main tradeoffs before implementation begins.
+As a developer, I want one AI Ecosystem agent to challenge a feature idea from multiple angles so that I see the main tradeoffs before implementation begins.
 
 ### 5.2 Architecture
 
@@ -130,9 +130,9 @@ As a maintainer, I want architecture, implementation, and operational perspectiv
 
 As a reviewer, I want a coordinator to ask distinct worker perspectives for critique so that the final output contains explicit disagreements instead of one blended opinion.
 
-### 5.4 CLASP Governance
+### 5.4 AI Ecosystem Governance
 
-As a CLASP maintainer, I want this capability implemented with minimal artifact sprawl so that it does not undermine the v3 consolidation.
+As a AI Ecosystem maintainer, I want this capability implemented with minimal artifact sprawl so that it does not undermine the v3 consolidation.
 
 ---
 
@@ -155,7 +155,7 @@ The workers:
 - do not own global rules
 - return compact findings only
 
-This is a coordination pattern, not a new ontology for CLASP.
+This is a coordination pattern, not a new ontology for AI Ecosystem.
 
 ---
 
@@ -165,7 +165,7 @@ This is a coordination pattern, not a new ontology for CLASP.
 
 - coordinator custom agent
 - 2–4 worker custom agents
-- optional CLASP instructions for orchestration behavior
+- optional AI Ecosystem instructions for orchestration behavior
 - optional prompt for feature-spec or strategy use
 - examples for Copilot Chat usage
 - explicit output format
@@ -177,13 +177,13 @@ This is a coordination pattern, not a new ontology for CLASP.
 - dynamic worker creation at runtime
 - freeform multi-agent conversation transcript generation
 - deep recursive nesting
-- replacing the 3 broad CLASP agents with many specialist visible agents
+- replacing the 3 broad AI Ecosystem agents with many specialist visible agents
 
 ---
 
 ## 8. Proposed Architecture
 
-## 8.1 Recommended CLASP Placement
+## 8.1 Recommended AI Ecosystem Placement
 
 Minimal recommended artifact set:
 
@@ -239,7 +239,7 @@ This means the visible experience is:
 
 ## 9. Design Constraints
 
-1. Must fit CLASP v3’s small visible-agent philosophy.
+1. Must fit AI Ecosystem v3’s small visible-agent philosophy.
 2. Must not duplicate verification logic into agent files.
 3. Must not place output structure rules into worker agents if a template exists.
 4. Must not place global epistemic rules into local orchestration files.
@@ -309,7 +309,7 @@ Optional future lenses:
 - Performance Lens
 - Migration Lens
 
-Important CLASP rule:
+Important AI Ecosystem rule:
 
 These are perspectives, not first-class domain empires.
 
@@ -350,7 +350,7 @@ Suggested workers:
 - Architecture Lens
 - Implementation Lens
 
-## Phase 2 — CLASP-Native Integration
+## Phase 2 — AI Ecosystem-Native Integration
 
 Deliver:
 
@@ -385,12 +385,12 @@ These are illustrative examples, not the only valid wording.
 
     ---
     name: Multi-Perspective Coordinator
-    description: Orchestrates bounded CLASP perspectives and synthesizes the result
+    description: Orchestrates bounded AI Ecosystem perspectives and synthesizes the result
     tools: ['agent', 'read', 'search']
     agents: ['Architecture Lens', 'Implementation Lens', 'Operations Lens']
     ---
 
-    You are a coordinator agent for CLASP.
+    You are a coordinator agent for AI Ecosystem.
 
     Purpose:
     - run bounded perspective analysis when the task benefits from structured disagreement
@@ -416,7 +416,7 @@ These are illustrative examples, not the only valid wording.
     Constraints:
     - do not invent repository facts
     - do not treat worker output as automatically verified
-    - preserve CLASP truth-first behavior
+    - preserve AI Ecosystem truth-first behavior
     - do not roleplay
     - do not output raw worker transcripts unless explicitly requested
 
@@ -479,11 +479,11 @@ These are illustrative examples, not the only valid wording.
 
 ---
 
-## 15. Optional CLASP Instruction File Example
+## 15. Optional AI Ecosystem Instruction File Example
 
     ---
     applyTo: '**'
-    description: Rules for CLASP multi-perspective orchestration
+    description: Rules for AI Ecosystem multi-perspective orchestration
     ---
 
     # Multi-Perspective Review
@@ -526,7 +526,7 @@ These are illustrative examples, not the only valid wording.
 
     ---
     name: generate-multi-perspective-analysis
-    description: Run CLASP multi-perspective analysis on a planning or design question
+    description: Run AI Ecosystem multi-perspective analysis on a planning or design question
     tools: ['agent', 'read', 'search']
     ---
 
@@ -693,11 +693,11 @@ The "party" effect is created by the coordinator’s output formatting and synth
    - unknowns / assumptions
 6. The output remains coherent when only 2 perspectives are used.
 
-## 20.2 CLASP Acceptance
+## 20.2 AI Ecosystem Acceptance
 
 1. No global epistemic rules are duplicated into local orchestration files.
 2. No verification-checklist logic is moved into worker agents.
-3. The feature does not increase the visible CLASP first-class agent surface beyond what is justified.
+3. The feature does not increase the visible AI Ecosystem first-class agent surface beyond what is justified.
 4. Perspective expertise remains narrow and composable.
 5. Unknown remains an allowed output.
 
@@ -711,15 +711,15 @@ The "party" effect is created by the coordinator’s output formatting and synth
 
 ## 21. Failure Modes and Mitigations
 
-| Failure Mode                               | Risk                      | Mitigation                                         |
-| ------------------------------------------ | ------------------------- | -------------------------------------------------- |
-| Too many worker agents                     | noise, maintenance, drift | hard-cap default at 2–3 workers                    |
-| Workers become mini-empires                | CLASP sprawl returns      | keep workers narrow and hidden                     |
-| Coordinator overuses subagents             | latency, complexity       | define "when NOT to use" clearly                   |
-| Perspectives collapse into the same answer | wasted orchestration      | give each worker a sharply bounded concern         |
-| Worker outputs treated as verified facts   | false confidence          | coordinator must preserve evidence status          |
-| Roleplay takes over                        | style over substance      | forbid persona theater in coordinator instructions |
-| Local files duplicate global rules         | authority drift           | enforce single ownership during review             |
+| Failure Mode                               | Risk                        | Mitigation                                         |
+| ------------------------------------------ | --------------------------- | -------------------------------------------------- |
+| Too many worker agents                     | noise, maintenance, drift   | hard-cap default at 2–3 workers                    |
+| Workers become mini-empires                | AI Ecosystem sprawl returns | keep workers narrow and hidden                     |
+| Coordinator overuses subagents             | latency, complexity         | define "when NOT to use" clearly                   |
+| Perspectives collapse into the same answer | wasted orchestration        | give each worker a sharply bounded concern         |
+| Worker outputs treated as verified facts   | false confidence            | coordinator must preserve evidence status          |
+| Roleplay takes over                        | style over substance        | forbid persona theater in coordinator instructions |
+| Local files duplicate global rules         | authority drift             | enforce single ownership during review             |
 
 ---
 
@@ -730,7 +730,7 @@ The "party" effect is created by the coordinator’s output formatting and synth
 - better structured disagreement
 - better surfacing of tradeoffs
 - useful for planning without premature implementation
-- CLASP-compatible if kept minimal
+- AI Ecosystem-compatible if kept minimal
 
 ### Costs
 
@@ -743,7 +743,7 @@ The "party" effect is created by the coordinator’s output formatting and synth
 
 ## 23. Recommendation
 
-Implement this feature in the smallest viable CLASP shape:
+Implement this feature in the smallest viable AI Ecosystem shape:
 
 - 1 visible coordinator agent
 - 2 hidden workers initially
@@ -767,7 +767,7 @@ Do not start with a large worker roster.
 2. The visible surface should remain small.
 3. The coordinator owns orchestration and synthesis.
 4. Workers own only bounded perspective reasoning.
-5. CLASP authority and verification remain where they already belong.
+5. AI Ecosystem authority and verification remain where they already belong.
 
 ---
 
@@ -777,7 +777,7 @@ Do not start with a large worker roster.
    - a visible coordinator agent
    - a prompt
    - or both?
-2. Should the first CLASP-native version include an operations lens immediately or defer it?
+2. Should the first AI Ecosystem-native version include an operations lens immediately or defer it?
 3. Should there be a dedicated template for multi-perspective analysis, or should the coordinator render directly?
 4. Should this feature remain read-only only, or later support a follow-up handoff into implementation?
 

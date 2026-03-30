@@ -1,11 +1,11 @@
-# Feature Specification — CLASP Orchestrated Implementation, Testing, and QA System
+# Feature Specification — AI Ecosystem Orchestrated Implementation, Testing, and QA System
 
 ## Document Control
 
 - **Document Type:** Feature Specification
 - **Status:** Proposed
 - **Mode:** Epistemic
-- **Target System:** CLASP ecosystem in VS Code with GitHub Copilot
+- **Target System:** AI Ecosystem ecosystem in VS Code with GitHub Copilot
 - **Feature Name:** Orchestrated Implementation, Testing, and QA System
 - **Short Name:** OITQ
 - **Primary Objective:** Introduce a robust, production-ready orchestration layer that separates feature implementation, test creation, and QA audit while preserving CLASP’s broad worker-agent model and strict ownership boundaries
@@ -57,7 +57,7 @@ implement those aspect runners first as **instructions / skill aspects**, not as
 
 ## 2. Summary
 
-This feature introduces a coordinated development pipeline for CLASP that separates three concerns that are currently too entangled:
+This feature introduces a coordinated development pipeline for AI Ecosystem that separates three concerns that are currently too entangled:
 
 1. **feature implementation**
 2. **test design and test implementation**
@@ -135,13 +135,13 @@ The desired future state is a pipeline where:
 5. Support a bounded remediation loop until the output converges or a stop condition is hit.
 6. Preserve the ability for any orchestrator to call `sparring-orchestrator` when deeper reasoning or conflict resolution is required.
 
-### 4.2 CLASP Alignment Goals
+### 4.2 AI Ecosystem Alignment Goals
 
-1. Preserve CLASP v3’s broad worker-agent model.
+1. Preserve AI Ecosystem v3’s broad worker-agent model.
 2. Avoid reintroducing many specialized visible agents.
 3. Keep procedural logic in procedures and skills.
 4. Keep domain expertise in instructions and skill resources.
-5. Preserve `software-engineer` as the only editing/execution agent unless CLASP deliberately changes that rule later.
+5. Preserve `software-engineer` as the only editing/execution agent unless AI Ecosystem deliberately changes that rule later.
 6. Preserve `code-reviewer` as read-only and adversarial.
 7. Preserve `thinking-assistant` as read-only and planning-heavy.
 
@@ -317,7 +317,7 @@ Instead:
 
 Reason:
 
-- it preserves the current CLASP tool-boundary model
+- it preserves the current AI Ecosystem tool-boundary model
 - it avoids splitting editing authority across multiple agents
 - it keeps test code and feature code under the same mechanical execution authority
 - it prevents agent sprawl where the only real difference is prompt framing
@@ -1105,7 +1105,7 @@ These should remain hidden and read-only.
 6. Any orchestrator can escalate to `sparring-orchestrator`.
 7. The system can stop honestly when no safe progress is possible.
 
-### 26.2 CLASP Acceptance
+### 26.2 AI Ecosystem Acceptance
 
 1. Worker-agent tool boundaries remain intact.
 2. Most new expertise lives in instructions and skills, not agent sprawl.
@@ -1126,16 +1126,16 @@ These should remain hidden and read-only.
 
 ## 27. Risks and Mitigations
 
-| Risk                                              | Impact                               | Mitigation                                                       |
-| ------------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------- |
-| Reintroducing agent sprawl                        | maintenance burden, CLASP regression | keep broad worker agents; put expertise into instructions/skills |
-| Test orchestrator writes too many low-value tests | slow suite, false confidence         | require test-selection rationale and rejected test types         |
-| QA becomes vague review theater                   | poor remediation                     | normalize findings and route by owner                            |
-| Flaky tests poison confidence                     | unreliable pipeline                  | explicit flakiness audit and stop/quarantine rules               |
-| Mutation testing overused                         | slow and noisy                       | make it selective, not default                                   |
-| E2E overused                                      | brittle suite, slow feedback         | require explicit rationale for E2E                               |
-| Orchestrators become god-prompts                  | drift and confusion                  | keep workflow logic in procedures/skills                         |
-| Conflict resolution gets buried                   | repeated churn                       | formal sparring escalation path                                  |
+| Risk                                              | Impact                                      | Mitigation                                                       |
+| ------------------------------------------------- | ------------------------------------------- | ---------------------------------------------------------------- |
+| Reintroducing agent sprawl                        | maintenance burden, AI Ecosystem regression | keep broad worker agents; put expertise into instructions/skills |
+| Test orchestrator writes too many low-value tests | slow suite, false confidence                | require test-selection rationale and rejected test types         |
+| QA becomes vague review theater                   | poor remediation                            | normalize findings and route by owner                            |
+| Flaky tests poison confidence                     | unreliable pipeline                         | explicit flakiness audit and stop/quarantine rules               |
+| Mutation testing overused                         | slow and noisy                              | make it selective, not default                                   |
+| E2E overused                                      | brittle suite, slow feedback                | require explicit rationale for E2E                               |
+| Orchestrators become god-prompts                  | drift and confusion                         | keep workflow logic in procedures/skills                         |
+| Conflict resolution gets buried                   | repeated churn                              | formal sparring escalation path                                  |
 
 ---
 
