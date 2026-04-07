@@ -8,7 +8,7 @@
 - **Target System:** AI Ecosystem ecosystem in VS Code with GitHub Copilot
 - **Feature Name:** Orchestrated Implementation, Testing, and QA System
 - **Short Name:** OITQ
-- **Primary Objective:** Introduce a robust, production-ready orchestration layer that separates feature implementation, test creation, and QA audit while preserving CLASP’s broad worker-agent model and strict ownership boundaries
+- **Primary Objective:** Introduce a robust, production-ready orchestration layer that separates feature implementation, test creation, and QA audit while preserving AI Ecosystem’s broad worker-agent model and strict ownership boundaries
 - **Primary Beneficiaries:** `feature-orchestrator`, new `test-orchestrator`, new `qa-orchestrator`, existing `sparring-orchestrator`, and the existing worker agents `software-engineer`, `code-reviewer`, and `thinking-assistant`
 
 ---
@@ -116,7 +116,7 @@ The desired future state is a pipeline where:
 - QA audits both code and tests deliberately
 - remediation is targeted to the right owner
 - conflict resolution is explicit
-- the whole flow remains aligned with CLASP’s authority model
+- the whole flow remains aligned with AI Ecosystem’s authority model
 
 ---
 

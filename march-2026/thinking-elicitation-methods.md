@@ -8,7 +8,7 @@
 - **Target System:** AI Ecosystem ecosystem in VS Code with GitHub Copilot
 - **Feature Name:** Advanced Elicitation Integration
 - **Short Name:** AEI
-- **Primary Objective:** Enhance CLASP’s existing multi-perspective orchestration and thinking workflow with structured second-pass critique using named elicitation methods
+- **Primary Objective:** Enhance AI Ecosystem’s existing multi-perspective orchestration and thinking workflow with structured second-pass critique using named elicitation methods
 - **Intended Audience:** AI Ecosystem maintainers, prompt/agent authors, workflow designers
 - **Primary Beneficiaries:** `thinking-assistant`, `sparring-orchestrator`, and any workflow that currently produces a synthesized recommendation
 
@@ -30,7 +30,7 @@ The feature is intended to:
 - improve failure-mode discovery
 - reduce shallow “first plausible answer” lock-in
 
-This feature must remain compatible with CLASP’s current architecture:
+This feature must remain compatible with AI Ecosystem’s current architecture:
 
 - small visible agent surface
 - broad agents rather than many narrow agents
@@ -51,7 +51,7 @@ Instead, it introduces one reusable capability that can be invoked:
 
 ## 2. Problem Statement
 
-CLASP’s current multi-perspective orchestration already works well by combining perspectives from multiple agents or subagents and synthesizing the result into a coherent recommendation.
+AI Ecosystem’s current multi-perspective orchestration already works well by combining perspectives from multiple agents or subagents and synthesizing the result into a coherent recommendation.
 
 However, even a well-synthesized result can still have weaknesses:
 
@@ -96,7 +96,7 @@ the system can produce strong first-pass reasoning, but it lacks a reusable, exp
 
 ### 3.2 AI Ecosystem Alignment Goals
 
-1. Preserve CLASP’s broad-agent architecture.
+1. Preserve AI Ecosystem’s broad-agent architecture.
 2. Avoid reintroducing many specialist “thinking lens” agents.
 3. Keep elicitation behavior as a workflow capability rather than agent proliferation.
 4. Place reusable logic in a skill and/or procedure.

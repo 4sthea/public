@@ -40,7 +40,7 @@ It is a coordination layer that sits above the existing AI Ecosystem agents and 
 - bounded loop control
 - mechanical verification
 
-This feature preserves CLASP’s v3 design principles:
+This feature preserves AI Ecosystem’s v3 design principles:
 
 - small visible agent surface
 - single ownership per concern
