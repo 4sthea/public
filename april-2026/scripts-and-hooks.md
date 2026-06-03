@@ -1,6 +1,6 @@
 # Scripts and Hooks Reference
 
-> **Audience:** Developers working on the Divical monorepo.
+> **Audience:** Developers working on the the project monorepo.
 > **Scope:** All shell scripts, Python utility scripts, Git hooks, agent lifecycle hooks, and dev container lifecycle scripts present in this repository.
 
 ---
@@ -140,15 +140,15 @@ Installs the `pre-push` Git hook into `.git/hooks/pre-push`. The installed hook 
 **Type:** Shell script  
 **Triggered by:** `.git/hooks/pre-push` (installed via `setup-hooks.sh`)
 
-Fast local quality gate that runs before every `git push`. Targets only Python files inside `divical-api/app/` that were changed relative to `origin/master` (new, modified, or added). Tests are intentionally excluded — they run in CI.
+Fast local quality gate that runs before every `git push`. Targets only Python files inside `the-project-api/app/` that were changed relative to `origin/master` (new, modified, or added). Tests are intentionally excluded — they run in CI.
 
 **Steps:**
 
-1. Resolves Python: uses `divical-api/.venv/bin/python` if available, falls back to `python3`.
+1. Resolves Python: uses `the-project-api/.venv/bin/python` if available, falls back to `python3`.
 2. Collects changed Python files with `git diff --name-only --diff-filter=ACM origin/master...HEAD`.
 3. If no files changed, exits 0 immediately (skip message).
 4. **[1/2] Lint:** Runs `ruff check` on all changed files. Exits 1 on any violation.
-5. **[2/2] Type check — changed files:** Runs `pyright` against only the changed files (paths made relative to `divical-api/` so `pyrightconfig.json` is picked up).
+5. **[2/2] Type check — changed files:** Runs `pyright` against only the changed files (paths made relative to `the-project-api/` so `pyrightconfig.json` is picked up).
 6. **[2b/2] Type check — full scope:** Runs `pyright app/` against the entire app directory. This mirrors CI and catches pre-existing errors that happened to be in the push scope.
 
 > **Design rationale (from runbook entry `[2026-03-14]`):** Full-scope pyright was added because a CI failure was caused by a type-ignore fix in `adapter.py` that wasn't in the changed-files diff.
@@ -211,7 +211,7 @@ Detects staleness in `.github/context/` documentation by validating extractable 
 
 **Checks performed:**
 
-- **`project-paths.md`:** Extracts backtick-quoted paths from the Markdown tables and verifies each path exists on disk. Also checks for top-level `divical-api/app/` module directories that appear on disk but are not listed in the file. Validates that `applyTo` patterns listed in tables match the actual frontmatter of the referenced instruction files.
+- **`project-paths.md`:** Extracts backtick-quoted paths from the Markdown tables and verifies each path exists on disk. Also checks for top-level `the-project-api/app/` module directories that appear on disk but are not listed in the file. Validates that `applyTo` patterns listed in tables match the actual frontmatter of the referenced instruction files.
 
 Output shape in `--json` mode:
 
@@ -221,7 +221,7 @@ Output shape in `--json` mode:
   "errors": 2,
   "warnings": 1,
   "findings": [
-    "ERROR|project-paths.md|Listed path missing: divical-api/app/newmodule/"
+    "ERROR|project-paths.md|Listed path missing: the-project-api/app/newmodule/"
   ]
 }
 ```
@@ -337,7 +337,7 @@ In `--check` mode, the script generates to a temp file and diffs against the com
 **Type:** Python script  
 **Requires:** `OPENROUTER_API_KEY` environment variable.
 
-Entry point for running the 4-stage research pipeline outside of the normal ARQ worker schedule. Adds `divical-api/` to `sys.path`, then imports and runs `app.services.research.pipeline.run_pipeline()` asynchronously.
+Entry point for running the 4-stage research pipeline outside of the normal ARQ worker schedule. Adds `the-project-api/` to `sys.path`, then imports and runs `app.services.research.pipeline.run_pipeline()` asynchronously.
 
 **Pipeline stages (executed inside the module):**
 
@@ -378,12 +378,12 @@ These scripts are invoked by `devcontainer.json` directives and are not normally
 Performs full initial setup:
 
 1. **Python backend**
-   - Creates `.venv` in `divical-api/` if it does not exist (or if the existing one is from a Windows environment).
+   - Creates `.venv` in `the-project-api/` if it does not exist (or if the existing one is from a Windows environment).
    - Detects GPU availability via `nvidia-smi`. If a GPU is present, installs `.[dev,gpu,ml]` extras; otherwise installs `.[dev,ml]` (CPU-only, avoids downloading large CUDA wheels).
    - Uses `--find-links /opt/pip-prefetch` if that path exists (pre-cached wheels baked into the Docker image) to avoid re-downloading on rebuilds.
 
 2. **Node frontend**
-   - Runs `npm install` in `divical-web/` (not `npm ci` — incremental update preserves existing `node_modules/` on persisted volumes).
+   - Runs `npm install` in `the-project-web/` (not `npm ci` — incremental update preserves existing `node_modules/` on persisted volumes).
 
 3. **Database**
    - Runs `alembic upgrade head` to apply pending migrations. If this fails (e.g., `.env` is not configured), logs a warning and continues.
@@ -394,7 +394,7 @@ Performs full initial setup:
 
 **Triggered by:** `devcontainer.json` → `postStartCommand` (on every container start).
 
-Auto-starts all three Divical services as background daemons using `nohup`. Logs are written to `.devcontainer/logs/`:
+Auto-starts all three the project services as background daemons using `nohup`. Logs are written to `.devcontainer/logs/`:
 
 | Service             | Command                                                    | Log file            |
 | ------------------- | ---------------------------------------------------------- | ------------------- |
@@ -439,7 +439,7 @@ Launches both backend and frontend in separate background processes. Waits for `
 
 ### `start-backend.sh` (Linux/macOS)
 
-Activates the Python virtual environment at `divical-api/.venv` and starts uvicorn in reload mode on `localhost:8000`.
+Activates the Python virtual environment at `the-project-api/.venv` and starts uvicorn in reload mode on `localhost:8000`.
 
 ```bash
 ./start-backend.sh
@@ -449,7 +449,7 @@ Activates the Python virtual environment at `divical-api/.venv` and starts uvico
 
 ### `start-frontend.sh` (Linux/macOS)
 
-Changes directory to `divical-web/` and runs `npm run dev` (Vite development server, default port 5173).
+Changes directory to `the-project-web/` and runs `npm run dev` (Vite development server, default port 5173).
 
 ```bash
 ./start-frontend.sh
@@ -488,10 +488,10 @@ Runs two parallel jobs:
 
 **`backend` job:**
 
-1. Installs Python 3.12 + `pip install -e "divical-api[dev]"`.
-2. `ruff check divical-api/app/` — lint.
-3. `cd divical-api && pyright app/` — type check.
-4. `cd divical-api && pytest -q --tb=short --cov=app --cov-report=term-missing` — test suite with coverage.
+1. Installs Python 3.12 + `pip install -e "the-project-api[dev]"`.
+2. `ruff check the-project-api/app/` — lint.
+3. `cd the-project-api && pyright app/` — type check.
+4. `cd the-project-api && pytest -q --tb=short --cov=app --cov-report=term-missing` — test suite with coverage.
 
 **`frontend` job:**
 

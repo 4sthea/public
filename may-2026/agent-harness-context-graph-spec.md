@@ -1,7 +1,7 @@
-# Spezifikation und Implementierungsplan: Python Context Graph für DiviCal + CLASP
+# Spezifikation und Implementierungsplan: Python Context Graph für the project + Agent Harness
 
 **Status:** Entwurf / MVP-Spezifikation  
-**Zielsystem:** DiviCal Repository + CLASP AI-Ökosystem in VS Code + GitHub Copilot  
+**Zielsystem:** the project Repository + Agent Harness AI-Ökosystem in VS Code + GitHub Copilot  
 **Primäre Sprache für das Tooling:** Python 3.11+  
 **MVP-Abhängigkeiten:** Nur Python-Standardbibliothek, keine Third-Party-Packages  
 **Primäres Ziel:** Weniger Kontext, weniger Tokens, bessere Datei-/Regelauswahl für Agenten
@@ -10,13 +10,13 @@
 
 ## 1. Executive Summary
 
-Ziel ist ein lokales Python-Tool, das aus dem DiviCal-Repository einen kompakten, deterministischen Repository-Graph erzeugt und daraus für konkrete Copilot-/Agent-Aufgaben kleine `context-pack` Dateien ableitet.
+Ziel ist ein lokales Python-Tool, das aus dem the project-Repository einen kompakten, deterministischen Repository-Graph erzeugt und daraus für konkrete Copilot-/Agent-Aufgaben kleine `context-pack` Dateien ableitet.
 
 Der Graph ersetzt nicht VS Codes semantische Indexierung. Er ergänzt sie um strukturelle Repository-Intelligenz:
 
 - Welche Dateien importieren welche anderen Dateien?
 - Welche Komponenten, Funktionen, Routen und Tests gehören zusammen?
-- Welche CLASP Agents, Skills, Instructions und Prompts hängen zusammen?
+- Welche Agent Harness Agents, Skills, Instructions und Prompts hängen zusammen?
 - Welche Regeln gelten für welche Pfade?
 - Welche Dateien sollte ein Agent zuerst lesen?
 
@@ -47,14 +47,14 @@ Der gewünschte Ansatz soll:
 - in Python oder einer ähnlich leichtgewichtigen Sprache umgesetzt werden,
 - ohne Third-Party-Packages starten,
 - für TypeScript/React und Python besser passen als ein C#-Tool,
-- DiviCal und das CLASP AI-Ökosystem unterstützen,
+- the project und das Agent Harness AI-Ökosystem unterstützen,
 - Kontext für VS Code + GitHub Copilot minimieren,
 - später optional über MCP bereitgestellt werden können,
 - aber nicht zwingend sofort einen MCP-Server benötigen.
 
 ### Nicht verifiziert
 
-Die tatsächliche aktuelle DiviCal-Repository-Struktur wurde in dieser Spezifikation nicht live analysiert. Daher sind konkrete Pfade wie `src/`, `.github/skills/`, `.github/agents/`, `.ai/tmp/` als empfohlene Zielstruktur zu verstehen, nicht als Behauptung, dass sie bereits existieren.
+Die tatsächliche aktuelle the project-Repository-Struktur wurde in dieser Spezifikation nicht live analysiert. Daher sind konkrete Pfade wie `src/`, `.github/skills/`, `.github/agents/`, `.ai/tmp/` als empfohlene Zielstruktur zu verstehen, nicht als Behauptung, dass sie bereits existieren.
 
 ---
 
@@ -95,7 +95,7 @@ Das Ziel ist ein lokaler Context Resolver, der vor der Agent-Ausführung eine kl
 
 - Kontextgröße pro Agent-Aufgabe reduzieren.
 - Relevante Dateien schneller und deterministischer finden.
-- CLASP Agents, Skills, Instructions und Prompts explizit modellieren.
+- Agent Harness Agents, Skills, Instructions und Prompts explizit modellieren.
 - Copilot-Agenten eine kleine Liste relevanter Dateien und Regeln geben.
 - Tokenverbrauch durch Context Packs statt Repository-Dumps senken.
 - Ohne Third-Party-Packages mit einem wartbaren MVP starten.
@@ -151,7 +151,7 @@ optional später: MCP Wrapper
 | JSON, Markdown, Regex | Sehr gut |
 | Python-AST | Eingebaut über `ast` |
 | Lokales CLI-Tooling | Sehr gut |
-| CLASP-Regeln und Markdown scannen | Sehr gut |
+| Agent-Harness-Regeln und Markdown scannen | Sehr gut |
 | Keine Third-Party-Packages nötig | Ja |
 | Späterer MCP-Wrapper | Gut möglich |
 | TypeScript/React-Heuristiken | Gut genug für MVP |
@@ -192,7 +192,7 @@ tools/
 .github/
   context/
     repo-map.md              # optional, stabile manuelle Übersicht
-    clasp-map.md             # optional, stabile CLASP-Übersicht
+    agent-harness-map.md             # optional, stabile Agent-Harness-Übersicht
 ```
 
 Empfohlene `.gitignore` Ergänzung:
@@ -419,9 +419,9 @@ Nicht zuverlässig erkannt:
 
 ---
 
-### 10.4 CLASP Markdown Scanner
+### 10.4 Agent Harness Markdown Scanner
 
-Der CLASP Scanner ist für dein Use Case besonders wichtig.
+Der Agent Harness Scanner ist für dein Use Case besonders wichtig.
 
 Erkennt Dateien nach Pfadkonvention:
 
@@ -504,7 +504,7 @@ score =
 + route match
 + graph-neighborhood bonus
 + test relation bonus
-+ CLASP rule relation bonus
++ Agent Harness rule relation bonus
 - noisy file penalty
 ```
 
@@ -603,7 +603,7 @@ Gibt zusätzlich das Context Pack auf stdout aus.
 
 ## 13. Copilot-Orchestrator-Regel
 
-Diese Regel sollte in den Orchestrator-Agent oder die zentrale CLASP Instruction aufgenommen werden.
+Diese Regel sollte in den Orchestrator-Agent oder die zentrale Agent Harness Instruction aufgenommen werden.
 
 ```md
 ## Context minimization policy
@@ -686,7 +686,7 @@ next:
 - Nur Context Pack lesen, nicht Graph dumpen.
 - Maximal 5–12 Dateien initial lesen.
 - Tests gezielt über Graph vorschlagen.
-- CLASP-Regeln gezielt auswählen.
+- Agent-Harness-Regeln gezielt auswählen.
 - Bei Blockade einmal gezielt expandieren.
 
 ### 15.2 Output reduzieren
@@ -736,7 +736,7 @@ reduziert zwar Maximaloutput, verbessert aber nicht automatisch die Informations
 |---|---:|---|
 | Context Pack | Sehr hoch | Direkter Token-Hebel |
 | Strukturierte YAML/JSON Outputs | Sehr hoch | Reduziert Prosa und Log-Ausgaben |
-| CLASP-Regel-Routing | Sehr hoch | Verhindert globales Instruction-Bloating |
+| Agent-Harness-Regel-Routing | Sehr hoch | Verhindert globales Instruction-Bloating |
 | Diff-only Context | Hoch | Gut bei bestehenden Änderungen |
 | Repository Map | Hoch | Gute Orientierung ohne Dateidumps |
 | AST-lite Graph | Hoch | Gutes Kosten/Nutzen-Verhältnis |
@@ -770,7 +770,7 @@ Output-Kompression kann über mehrere Wege passieren:
    Lange Zwischenergebnisse werden zusammengefasst.  
    Nützlich, aber kann Details verlieren.
 
-Für DiviCal + CLASP ist der beste Start nicht extreme Symbolkompression, sondern:
+Für the project + Agent Harness ist der beste Start nicht extreme Symbolkompression, sondern:
 
 ```text
 Context Packs + strukturierte Agent-I/O + harte Scoping-Regeln
@@ -876,11 +876,11 @@ tools/context_graph/context_graph.py existiert
 
 ---
 
-## Phase 5: CLASP Scanner
+## Phase 5: Agent Harness Scanner
 
 ### Aufgaben
 
-- CLASP-Dateien per Pfadkonvention erkennen.
+- Agent-Harness-Dateien per Pfadkonvention erkennen.
 - Agent-, Skill-, Instruction- und Prompt-Nodes erzeugen.
 - `applyTo:` erkennen.
 - Pfadreferenzen auf Skills, Instructions und Prompts erkennen.
@@ -920,7 +920,7 @@ tools/context_graph/context_graph.py existiert
 
 ---
 
-## Phase 7: Copilot/CLASP Integration
+## Phase 7: Copilot/Agent Harness Integration
 
 ### Aufgaben
 
@@ -941,13 +941,13 @@ tools/context_graph/context_graph.py existiert
 
 ### Aufgaben
 
-Eine kleine Benchmark-Suite mit echten DiviCal-/CLASP-Aufgaben erstellen:
+Eine kleine Benchmark-Suite mit echten the-project-/Agent Harness-Aufgaben erstellen:
 
 ```text
 5 Frontend Tasks
 5 Backend/API Tasks
 5 Test Tasks
-5 CLASP/Agent Tasks
+5 Agent Harness/Agent Tasks
 ```
 
 Für jede Aufgabe messen:
@@ -968,7 +968,7 @@ Für jede Aufgabe messen:
 - Context Pack reduziert gelesene Dateien im Vergleich zu blindem Copilot-Suchen.
 - Task Success darf nicht schlechter werden.
 - Falsch-positive Dateien sinken.
-- CLASP-Regeln werden gezielter ausgewählt.
+- Agent-Harness-Regeln werden gezielter ausgewählt.
 
 ---
 
@@ -982,7 +982,7 @@ Erst nach erfolgreichem CLI-MVP.
 resolve_context
 impact
 tests_for
-clasp_rules_for
+agent_harness_rules_for
 explain_path
 ```
 
@@ -1008,7 +1008,7 @@ from fnmatch import fnmatch
 Nutzen:
 
 - `applyTo` Regeln korrekt auf Pfade anwenden.
-- CLASP Instructions gezielter auswählen.
+- Agent Harness Instructions gezielter auswählen.
 
 ### 18.2 Repo Map Generator
 
@@ -1024,7 +1024,7 @@ Inhalt:
 - wichtige Entry Points,
 - Frontend/Backend-Grenzen,
 - Testkonventionen,
-- CLASP-Struktur.
+- Agent-Harness-Struktur.
 
 ### 18.3 Diff-only Context
 
@@ -1068,7 +1068,7 @@ Vorher messen, ob der graphbasierte MVP nicht bereits ausreichend ist.
 |---|---|---|
 | Regex-Scanner erkennt nicht alles | fehlende Kandidaten | graph expansion + exact search fallback |
 | Zu viele Same-module Kanten | noisy Context Packs | Verzeichnisse mit >25 Dateien überspringen |
-| CLASP-Regeln werden zu breit geladen | Token-Bloat | applyTo-Glob-Matching einbauen |
+| Agent-Harness-Regeln werden zu breit geladen | Token-Bloat | applyTo-Glob-Matching einbauen |
 | Graph wird groß | Agent darf ihn nicht lesen | nur Context Pack lesen |
 | Stale Graph | falsche Vorschläge | bei Resolve automatisch rebuilden oder Hash prüfen |
 | Dynamische Routen fehlen | API-Kanten unvollständig | später Routen-Summary ergänzen |
@@ -1085,7 +1085,7 @@ Der MVP gilt als fertig, wenn:
 2. `resolve` ein kleines Context Pack erzeugt.
 3. TypeScript/React-Dateien grob erkannt werden.
 4. Python-Dateien über `ast` erkannt werden.
-5. CLASP Agents/Skills/Instructions/Prompts erkannt werden.
+5. Agent Harness Agents/Skills/Instructions/Prompts erkannt werden.
 6. Tests über einfache Namenskonventionen vorgeschlagen werden.
 7. Copilot-Agenten angewiesen sind, zuerst das Context Pack zu verwenden.
 8. Mindestens 10 reale Aufgaben mit und ohne Context Pack verglichen wurden.
@@ -1139,7 +1139,7 @@ Mit 5 echten Tasks testen:
 1 Frontend UI Änderung
 1 Backend/API Änderung
 1 Test-Erweiterung
-1 CLASP Skill/Instruction Änderung
+1 Agent Harness Skill/Instruction Änderung
 1 Bugfix mit unbekannter Ursache
 ```
 
@@ -1168,7 +1168,7 @@ notes
 | P0 | Resolve Command + Context Pack |
 | P1 | TypeScript/React Scanner |
 | P1 | Python AST Scanner |
-| P1 | CLASP Markdown Scanner |
+| P1 | Agent Harness Markdown Scanner |
 | P1 | Test Edge Detection |
 | P2 | applyTo Glob Matching |
 | P2 | Diff-aware Ranking |
@@ -1188,7 +1188,7 @@ Die empfohlene Lösung ist:
 ```text
 kleines Python CLI
 + deterministischer Repo Graph
-+ CLASP Governance Graph
++ Agent Harness Governance Graph
 + kompakte Context Packs
 + strikte Agent-Regeln
 + spätere MCP-Hülle nur bei nachgewiesenem Nutzen

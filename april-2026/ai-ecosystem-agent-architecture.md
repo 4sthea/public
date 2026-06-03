@@ -126,13 +126,13 @@ Current instruction roster (17 files):
 | `elicitation-techniques` | Elicitator agent & requirements-elicitation skill                     | Question taxonomy, quality rules, viewpoint sweep                          |
 | `feature-delivery`       | Feature delivery skill, prompts, agents                               | Lifecycle conventions, remediation guidance, slice management              |
 | `multi-aspect-review`    | `**/*review*`                                                         | Structured multi-aspect code review with normalized findings               |
-| `rbi-pipeline`           | `divical-api/app/workers/**`, `services/research/**`, `strategies/**` | RBI pipeline implicit contracts, change-propagation rules                  |
+| `rbi-pipeline`           | `the-project-api/app/workers/**`, `services/research/**`, `strategies/**` | RBI pipeline implicit contracts, change-propagation rules                  |
 | `refactor-plan`          | _(on-demand)_                                                         | Refactor plan design guidance                                              |
 | `runbook`                | `**` (always-on)                                                      | Curated operational runbook — max 10 entries with "Do instead" actions     |
 | `security-review`        | _(on-demand)_                                                         | Security risk identification in code, configs, infrastructure              |
 | `sparring-orchestration` | Sparring/thinker agents & multi-perspective prompts                   | Multi-perspective analysis orchestration rules                             |
-| `stack-python`           | `divical-api/**/*.py`                                                 | Python/FastAPI backend conventions                                         |
-| `stack-react`            | `divical-web/**/*.{tsx,jsx,ts,js}`                                    | React/TypeScript frontend conventions                                      |
+| `stack-python`           | `the-project-api/**/*.py`                                                 | Python/FastAPI backend conventions                                         |
+| `stack-react`            | `the-project-web/**/*.{tsx,jsx,ts,js}`                                    | React/TypeScript frontend conventions                                      |
 | `state-management`       | `.github/agents/*-orchestrator*`                                      | Workflow state persistence and session resumption protocol                 |
 | `testing`                | `**/*test*,**/*spec*`                                                 | Test strategy, architecture, structuring conventions                       |
 | `verification-checklist` | `**` (always-on)                                                      | Anti-fabrication enforcement — verification gates for repo-specific claims |
@@ -748,8 +748,8 @@ Runs the full verification gate independently for backend and/or frontend:
 
 | Component               | Step 1 (Lint)  | Step 2 (Types) | Step 3 (Tests)        |
 | ----------------------- | -------------- | -------------- | --------------------- |
-| **API** (`divical-api`) | `ruff check .` | `pyright app/` | `pytest tests/ -x -q` |
-| **Web** (`divical-web`) | `eslint src/`  | `tsc --noEmit` | `npm test -- --run`   |
+| **API** (`the-project-api`) | `ruff check .` | `pyright app/` | `pytest tests/ -x -q` |
+| **Web** (`the-project-web`) | `eslint src/`  | `tsc --noEmit` | `npm test -- --run`   |
 
 Usage: `scripts/verify-feature-slice.sh api`, `scripts/verify-feature-slice.sh web`, or `scripts/verify-feature-slice.sh both`.
 
@@ -1054,7 +1054,7 @@ Per `rbi-pipeline.instructions.md`, changes to these contracts require coordinat
 - Split `AI Ecosystem-governance.instructions.md` into runtime (always-on, `applyTo: "**"`) + authoring (scoped to `.github/**`)
 - Deleted `session-today.instructions.md` (obsolete — replaced by VS Code memory system)
 - Created `save.prompt.md` for curating conversation learnings into persistent memory
-- Full ecosystem audit: fixed missing prompt frontmatter, narrowed over-broad `applyTo` scopes for stack instructions, relocated repo-specific prompt to `divical-api/prompts/`
+- Full ecosystem audit: fixed missing prompt frontmatter, narrowed over-broad `applyTo` scopes for stack instructions, relocated repo-specific prompt to `the-project-api/prompts/`
 - Documented Explore subagent (VS Code built-in) in agent roster
 - Archived 5 dead-weight files from v1 consolidation
 

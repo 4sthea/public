@@ -6,7 +6,7 @@
 
 There are **two distinct "swarm" concepts** in this codebase:
 
-1. **The RBI Research Pipeline** (automated, runs in `divical-api` via ARQ cron / GitHub Actions) — this is the "research swarm" that produces a consensus document.
+1. **The RBI Research Pipeline** (automated, runs in `the-project-api` via ARQ cron / GitHub Actions) — this is the "research swarm" that produces a consensus document.
 2. **The AI Ecosystem agent orchestration** (VS Code agents) — this is the sequence of orchestrators that turn research output into implemented, tested, reviewed code.
 
 **Manual touch points:** Only **two** in the entire pipeline — reading the consensus document and reviewing the generated feature specification. Everything else runs autonomously.

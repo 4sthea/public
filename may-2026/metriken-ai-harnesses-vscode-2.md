@@ -16,7 +16,7 @@ Erstens **Task Resolution Rate** mit deterministischen Verifiern. Zweitens **Ins
 4) Kosten/Latenz dürfen nur in definierten Grenzen steigen.  
 Erst **danach** darfst du einen Komfort-Index für Trendbeobachtung bauen. Das ist robuster als ein einziger „AI score“. Diese Empfehlung ist eine Synthese aus den Quellen, nicht selbst ein standardisierter Benchmark. citeturn18view0turn22view0turn33view0
 
-**Wichtige Einschränkung:** Den Inhalt deines ausgewählten GitHub-Repos **4sthea/Divical** konnte ich in dieser Sitzung **nicht verifizieren**. Deshalb nenne ich **keine repo-spezifischen Dateien, Klassen oder Build-Kommandos** aus Divical. Der Integrationsplan unten ist daher absichtlich **repo-neutral**, aber direkt auf **VS Code + GitHub Copilot + AI-Harness-Evaluation** zugeschnitten.
+**Wichtige Einschränkung:** Den Inhalt deines ausgewählten GitHub-Repos **4sthea/the project** konnte ich in dieser Sitzung **nicht verifizieren**. Deshalb nenne ich **keine repo-spezifischen Dateien, Klassen oder Build-Kommandos** aus the project. Der Integrationsplan unten ist daher absichtlich **repo-neutral**, aber direkt auf **VS Code + GitHub Copilot + AI-Harness-Evaluation** zugeschnitten.
 
 ## Was du wirklich messen solltest
 
@@ -286,11 +286,11 @@ Wenn du zwei Dinge gleichzeitig änderst, weißt du hinterher nicht, was den Eff
 
 Bei binären Metriken wie „Task bestanden / nicht bestanden“ solltest du mindestens ein **Konfidenzintervall** über die Rate berichten; die NIST-Handbook-Seite empfiehlt für Proportionen u. a. die **Wilson-Methode**. Für gepaarte Vorher/Nachher-Binärvergleiche ist ein **paired proportion test** wie McNemar fachlich passend. Diese Statistikempfehlung ist Standardstatistik; die konkrete Auswahl ist meine Empfehlung für dein Setup. citeturn34search1turn34search0
 
-## So würde ich es in Divical einbauen
+## So würde ich es in the project einbauen
 
 ### Ein robuster Minimalaufbau
 
-**Empfehlung:** Ich würde in Divical einen Ordner wie `.github/evals/` oder `tools/ai-evals/` anlegen und dort vier Dinge definieren:
+**Empfehlung:** Ich würde in the project einen Ordner wie `.github/evals/` oder `tools/ai-evals/` anlegen und dort vier Dinge definieren:
 
 1. **Task-Katalog**  
    Kleine, realistische Tasks mit deterministischen Verifiern.
@@ -350,7 +350,7 @@ Wichtig ist: **kein Selbstbericht des Agents als Ground Truth**. Wenn der Agent 
 
 ### Ein konkreter Score, der in der Praxis funktioniert
 
-**Empfehlung:** Wenn du in Divical einen einzigen Vergleichsreport sehen willst, würde ich so gewichten:
+**Empfehlung:** Wenn du in the project einen einzigen Vergleichsreport sehen willst, würde ich so gewichten:
 
 **Harte Gates**
 - `resolved_rate_delta >= 0`
@@ -372,7 +372,7 @@ Diese Gewichtung ist **meine Engineering-Empfehlung**, nicht ein offiziell stand
 **Fakt:** Für den Cloud-Agent gibt es 2026 mehrere relevante Bausteine:  
 GitHub dokumentiert `copilot-setup-steps.yml` zur Konfiguration des Environments; Session-Logs zeigen inzwischen Setup-Schritte, Custom Setup Output und Subagent-Aktivität besser an; Commits verlinken auf Session Logs; und GitHub beschreibt explizit Session Tracking und Environment Customization. Quellenstand: März bis Mai 2026, Alter: **2 Tage bis 2 Monate**. citeturn27view1turn41search0turn41search5turn41search11
 
-**Empfehlung:** Wenn Divical später Cloud-Agent-Evals bekommt, dann sollte dein `copilot-setup-steps.yml` nicht nur Build-Dependencies installieren, sondern auch deine **Verifikationstools** garantieren: Testframework, Linter, Typechecker, Security-Scanner, ggf. repo-spezifische Guardrails. Sonst verwechselst du Harness-Qualität mit zufälligen Environment-Unterschieden. GitHub weist selbst darauf hin, dass trial-and-error Dependency Discovery langsam und unzuverlässig sein kann. citeturn41search3turn41search0
+**Empfehlung:** Wenn the project später Cloud-Agent-Evals bekommt, dann sollte dein `copilot-setup-steps.yml` nicht nur Build-Dependencies installieren, sondern auch deine **Verifikationstools** garantieren: Testframework, Linter, Typechecker, Security-Scanner, ggf. repo-spezifische Guardrails. Sonst verwechselst du Harness-Qualität mit zufälligen Environment-Unterschieden. GitHub weist selbst darauf hin, dass trial-and-error Dependency Discovery langsam und unzuverlässig sein kann. citeturn41search3turn41search0
 
 ## Nutzerstimmung und Praxissignale aus 2026
 
@@ -388,11 +388,11 @@ GitHub dokumentiert `copilot-setup-steps.yml` zur Konfiguration des Environments
 
 **Meine Empfehlung, wenn du nächste Woche anfangen willst:**
 
-Baue zuerst **eine kleine, ehrliche Evalsuite mit 20–40 Divical-nahen Tasks**. Halte Modell, Effort-Level, Tool-Set und Repo-Snapshot konstant. Miss pro Trial **Resolution**, **Adherence**, **Recovery**, **Bad Tool Calls**, **Tokens**, **Latency** und **Human Burden**. Instrumentiere **VS Code Hooks + OTel + Chat Debug Export**. Nutze **Instructions/AGENTS/Skills/Prompt Files** als separate Varianten und vergleiche sie immer **gepaart** gegen dieselbe Task-Suite. Verwende GitHub-Nutzungsmetriken nur als Ergänzung, nicht als Kernsignal. Und wenn ein Change die Pass-Rate minimal verbessert, aber Tool-Fehler, Tokens, Schleifen oder Nacharbeit stark verschlechtert, ist das **kein Gewinn**, sondern meist nur anders versteckte Kosten. Diese Schlussfolgerung ist meine Synthese, aber sie ist sehr gut durch die 2026er Primärquellen gedeckt. citeturn18view2turn22view0turn33view0turn36view0turn31view4
+Baue zuerst **eine kleine, ehrliche Evalsuite mit 20–40 the project-nahen Tasks**. Halte Modell, Effort-Level, Tool-Set und Repo-Snapshot konstant. Miss pro Trial **Resolution**, **Adherence**, **Recovery**, **Bad Tool Calls**, **Tokens**, **Latency** und **Human Burden**. Instrumentiere **VS Code Hooks + OTel + Chat Debug Export**. Nutze **Instructions/AGENTS/Skills/Prompt Files** als separate Varianten und vergleiche sie immer **gepaart** gegen dieselbe Task-Suite. Verwende GitHub-Nutzungsmetriken nur als Ergänzung, nicht als Kernsignal. Und wenn ein Change die Pass-Rate minimal verbessert, aber Tool-Fehler, Tokens, Schleifen oder Nacharbeit stark verschlechtert, ist das **kein Gewinn**, sondern meist nur anders versteckte Kosten. Diese Schlussfolgerung ist meine Synthese, aber sie ist sehr gut durch die 2026er Primärquellen gedeckt. citeturn18view2turn22view0turn33view0turn36view0turn31view4
 
 ## Offene Fragen und Grenzen
 
-**Unvollständig verifiziert:** Ich konnte den ausgewählten GitHub-Quellbestand **4sthea/Divical** in dieser Sitzung nicht direkt lesen. Daher ist der Integrationsplan **repo-neutral** und nennt bewusst keine verifizierten Divical-Dateien, Skripte oder Build-Befehle.
+**Unvollständig verifiziert:** Ich konnte den ausgewählten GitHub-Quellbestand **4sthea/the project** in dieser Sitzung nicht direkt lesen. Daher ist der Integrationsplan **repo-neutral** und nennt bewusst keine verifizierten the project-Dateien, Skripte oder Build-Befehle.
 
 **Wichtige methodische Grenze:** Viele 2026er Publikationen und Produktdokumente beschreiben **Prinzipien, interne Frameworks oder Plattformfähigkeiten**, aber veröffentlichen **nicht immer den vollständigen Produktionscode** ihrer Harnesses. Besonders bei VS Code VSC-Bench und der internen Eval-Pipeline ist die **Architektur öffentlich beschrieben**, aber nicht als vollständig auditierbares öffentliches Repo in meinem hier genutzten Material verfügbar. citeturn18view0turn18view2
 

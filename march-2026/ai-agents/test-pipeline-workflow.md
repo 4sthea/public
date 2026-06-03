@@ -208,7 +208,7 @@ flowchart LR
     FIN --> T5[Survivorship Bias]
 ```
 
-**Scope:** `divical-api/app/workers/**`, `divical-api/app/services/research/**`, `divical-api/app/strategies/**`, `divical-api/app/ml/**`
+**Scope:** `the-project-api/app/workers/**`, `the-project-api/app/services/research/**`, `the-project-api/app/strategies/**`, `the-project-api/app/ml/**`
 
 Full aspect definition: `.github/skills/multi-aspect-code-review/aspects/financial-logic.aspect.md`
 

@@ -8,7 +8,7 @@ Für **VS Code + GitHub Copilot** gilt 2026 konkret: Copilot bietet inzwischen o
 
 Für modelseitige Aktualität ist 2026 wichtig: GitHub Copilot listet in der deutschen Dokumentation aktuell unter anderem **GPT-5.4**, **GPT-5.5**, **Claude Opus 4.6**, **Claude Opus 4.7**, **Claude Sonnet 4.6**, **Gemini 3.1 Pro** und weitere Modelle; zugleich weist GitHub explizit darauf hin, dass sich Modellverfügbarkeit ändern kann. Wenn du Harness-Änderungen misst, solltest du deshalb **nie** die automatische Modellauswahl als Kontrollbedingung verwenden, sondern Modell, Version, Routing-Modus und Prompt-/Instructions-Stand explizit pinnen. **Datenstand:** GitHub Docs DE, Snapshot 2026-05-28, Alter 0 Tage. citeturn23view0turn22search2turn22search7turn22search8
 
-Für **DiviCal** konnte ich in dieser Sitzung **keine öffentliche Repository-Struktur verifizieren**; die öffentliche GitHub-URL war in der Web-Ansicht nicht verfügbar. Deshalb ist der DiviCal-Teil unten als **verifizierungsbewusster Implementierungsplan** für ein typisches VS-Code-/Copilot-/GitHub-Actions-Repo formuliert und **nicht** als behauptete Bestandsaufnahme eurer aktuellen Ordnerstruktur. citeturn3view0
+Für **the project** konnte ich in dieser Sitzung **keine öffentliche Repository-Struktur verifizieren**; die öffentliche GitHub-URL war in der Web-Ansicht nicht verfügbar. Deshalb ist der the project-Teil unten als **verifizierungsbewusster Implementierungsplan** für ein typisches VS-Code-/Copilot-/GitHub-Actions-Repo formuliert und **nicht** als behauptete Bestandsaufnahme eurer aktuellen Ordnerstruktur. citeturn3view0
 
 ## Verifizierte Ausgangslage für VS Code und Copilot
 
@@ -87,7 +87,7 @@ flowchart TD
 
 ### Empfohlene Projektstruktur für einen Harness-Benchmark
 
-Da ich die aktuelle DiviCal-Struktur nicht verifizieren konnte, ist dies ein **zielbildorientiertes Layout**, das für ein gemischtes .NET-/TypeScript-Repo mit VS Code und Copilot praktikabel ist:
+Da ich die aktuelle the project-Struktur nicht verifizieren konnte, ist dies ein **zielbildorientiertes Layout**, das für ein gemischtes .NET-/TypeScript-Repo mit VS Code und Copilot praktikabel ist:
 
 ```text
 .github/
@@ -124,11 +124,11 @@ telemetry/
     judge_score.schema.json
 
 src/
-  DiviCal.AI/
-  DiviCal.AI.Telemetry/
+  TheProject.AI/
+  TheProject.AI.Telemetry/
 
 tests/
-  DiviCal.AI.Benchmarks/
+  TheProject.AI.Benchmarks/
 ```
 
 Die wichtigsten VS-Code-/Copilot-Anknüpfungspunkte sind dabei offiziell dokumentiert: Prompt Files liegen standardmäßig in `.github/prompts`; Repository- und Path-Instructions in `copilot-instructions.md` und `.instructions.md`; VS Code kann Agent-Debug-Logs inklusive File-Logging schreiben; GitHub Copilot kann projektspezifische Build-, Test- und Validierungsanweisungen aus Repo-Instructions ziehen. **Datenstand:** VS Code/GitHub Docs Snapshot 2026-05-28, Alter 0 Tage; GitHub Blog 2026-02-26, Alter 92 Tage. citeturn20view0turn20view2turn19view4turn19view5turn20view3
@@ -286,8 +286,8 @@ main().catch(err => {
 ### .NET-Telemetry-Sink
 
 ```csharp
-// src/DiviCal.AI.Telemetry/RunEvent.cs
-namespace DiviCal.AI.Telemetry;
+// src/TheProject.AI.Telemetry/RunEvent.cs
+namespace TheProject.AI.Telemetry;
 
 public sealed record RunEvent(
     Guid RunId,
@@ -309,10 +309,10 @@ public sealed record RunEvent(
     decimal? JudgeScore
 );
 
-// src/DiviCal.AI.Telemetry/JsonlTelemetrySink.cs
+// src/TheProject.AI.Telemetry/JsonlTelemetrySink.cs
 using System.Text.Json;
 
-namespace DiviCal.AI.Telemetry;
+namespace TheProject.AI.Telemetry;
 
 public sealed class JsonlTelemetrySink
 {
@@ -409,11 +409,11 @@ Mein Ranking für deinen Einsatzzweck ist deshalb:
 4. **Braintrust** oder **Langfuse** wenn du mehr Team-Exploration, Historisierung und Langzeit-Observability brauchst.  
 5. **Copilot Metrics Viewer** nur als Zusatzinstrument für Adoption/Acceptance, nicht als Qualitätsorakel. citeturn24view1turn39search1turn24view4turn24view7turn34view4turn34view5
 
-## Konkreter DiviCal-Plan
+## Konkreter the project-Plan
 
-Weil ich die tatsächliche Repo-Struktur von DiviCal nicht verifizieren konnte, empfehle ich einen **migrationssicheren Plan**, der keine Annahmen über bereits vorhandene Ordner braucht. Der Plan setzt auf **additive Einführung** statt tiefer Umbauten. citeturn3view0
+Weil ich die tatsächliche Repo-Struktur von the project nicht verifizieren konnte, empfehle ich einen **migrationssicheren Plan**, der keine Annahmen über bereits vorhandene Ordner braucht. Der Plan setzt auf **additive Einführung** statt tiefer Umbauten. citeturn3view0
 
-### Minimaler Stack für DiviCal
+### Minimaler Stack für the project
 
 Wenn du schnell zu belastbaren Vorher/Nachher-Messungen kommen willst, nimm diesen kleinen Stack:
 
@@ -422,7 +422,7 @@ Wenn du schnell zu belastbaren Vorher/Nachher-Messungen kommen willst, nimm dies
 - **Pflichtstatistik:** gepaarte Aufgaben, `N=5` pro PR, `N=20` vor Release, Bootstrap-CI auf Delta, McNemar für Success.
 - **Pflichtgate:** harte Regression bei Task Success, Invalid Tool Calls oder Reverts blockiert Merge. citeturn29view0turn26search7turn31view0turn24view1
 
-### Erweiterter Stack für DiviCal
+### Erweiterter Stack für the project
 
 Wenn du danach weitergehst, ergänze:
 
@@ -437,7 +437,7 @@ Wenn du danach weitergehst, ergänze:
 
 **Phase eins** legt nur Daten ab. Füge Prompt-/Instruction-Dateien formal in `.github/` ein, aktiviere Agent-Debug-File-Logging in den Entwicklerprofilen oder in einem dedizierten Benchmark-Profil, und schreibe JSONL pro Lauf. Noch keine PR-Gates. **Datenstand:** VS Code/GitHub Docs Snapshot 2026-05-28, Alter 0 Tage. citeturn19view5turn20view0turn19view4
 
-**Phase zwei** führt eine kleine kuratierte Suite von 20–40 DiviCal-Kernfällen ein, etwa „Bugfix in bestehendem Modul“, „Tests ergänzen“, „kleine UI-Anpassung“, „Refactor mit grünen Tests“, „Anweisung nur auf Backend-Pfad anwenden“. Jede Harness-Änderung läuft gegen diese Suite mit `N=5`. **Datenstand:** OpenAI/DeepEval/Promptfoo 2026-01 bis 2026-05, Alter 126 bis 7 Tage. citeturn29view0turn26search7turn24view1turn40view0
+**Phase zwei** führt eine kleine kuratierte Suite von 20–40 the project-Kernfällen ein, etwa „Bugfix in bestehendem Modul“, „Tests ergänzen“, „kleine UI-Anpassung“, „Refactor mit grünen Tests“, „Anweisung nur auf Backend-Pfad anwenden“. Jede Harness-Änderung läuft gegen diese Suite mit `N=5`. **Datenstand:** OpenAI/DeepEval/Promptfoo 2026-01 bis 2026-05, Alter 126 bis 7 Tage. citeturn29view0turn26search7turn24view1turn40view0
 
 **Phase drei** hängt an den PR-Workflow. Wenn `.github/prompts`, `.github/instructions`, `.github/agents`, Runner oder Eval-Rubriken geändert werden, läuft die A/B-Suite automatisch. Das Gate blockiert bei klarer Outcome-Regression. **Datenstand:** Promptfoo GitHub Action; Braintrust eval-action; LangSmith CI/CD docs. **2026-05-28 bis 2026-05-22, Alter 0 bis 6 Tage.** citeturn24view1turn34view1turn27search13
 
@@ -464,7 +464,7 @@ Die Tests sollten so gewählt werden:
 
 ### Konkrete Gate-Regeln, die ich empfehlen würde
 
-Für ein erstes belastbares DiviCal-Gate würde ich genau diese Regeln einsetzen:
+Für ein erstes belastbares the project-Gate würde ich genau diese Regeln einsetzen:
 
 | Gate | Empfehlung |
 |---|---|
@@ -480,7 +480,7 @@ Das sind **empfohlene Schwellen**, keine offiziellen Herstellergrenzen. Sie sind
 
 ## Offene Fragen und Grenzen
 
-Der größte methodische Restpunkt ist **DiviCal selbst**: Ich konnte die tatsächliche Struktur des Repos in dieser Sitzung nicht verifizieren; deshalb habe ich keine unbewiesenen Aussagen über vorhandene Ordner, Projekte, CI-Dateien oder Tech-Stacks im Repo gemacht. Der DiviCal-Teil ist absichtlich als **verifizierungsbewusster Zielplan** formuliert. citeturn3view0
+Der größte methodische Restpunkt ist **the project selbst**: Ich konnte die tatsächliche Struktur des Repos in dieser Sitzung nicht verifizieren; deshalb habe ich keine unbewiesenen Aussagen über vorhandene Ordner, Projekte, CI-Dateien oder Tech-Stacks im Repo gemacht. Der the project-Teil ist absichtlich als **verifizierungsbewusster Zielplan** formuliert. citeturn3view0
 
 Zweitens sind **YouTube-Kommentare** im aktuellen Browse-Kontext kaum belastbar auswertbar; die Video-Seiten selbst ließen sich in meinen Tests nicht zuverlässig öffnen. Die Community-Synthese stützt sich deshalb hauptsächlich auf **Reddit**, **GitHub Community**, **Issues/Discussions** und offizielle Tool-/Dokuquellen. citeturn18view0turn18view1
 

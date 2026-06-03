@@ -51,7 +51,7 @@ SampleProject ist laut Root-Agent-Vertrag ein **Dividend-Capture Decision System
 | Copilot-/Agent-Harness-Schicht | `.github/` |
 | OpenCode-Schicht | `.opencode/` |
 | Codex-Adapter | `.codex/` |
-| Shared Rules | `clasp/rules/` |
+| Shared Rules | `agent-harness/rules/` |
 | Kanonische Repo-Maps | `.github/context/project-paths.md`, `.github/context/repo-map.md` |
 
 ### 1.2 Bestehende Verifikationsbefehle
@@ -71,7 +71,7 @@ TypeScript tests: cd sampleproject-web && npm test -- --run
 Für Agent-Harness-/`.github/`-Änderungen existieren bereits:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts\verify-clasp-freshness.ps1 -Lint
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\verify-agent-harness-freshness.ps1 -Lint
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\verify-context-freshness.ps1
 ```
 
@@ -114,7 +114,7 @@ Gemessen wird die Qualität des **SampleProject AI Harness** nach Änderungen an
 | Prompts | `.github/prompts/*.prompt.md` |
 | Skills | `.github/skills/*/SKILL.md` |
 | Root-/Subtree-Verträge | `AGENTS.md`, `*/AGENTS.md` |
-| Shared Rules | `clasp/rules/*.md` |
+| Shared Rules | `agent-harness/rules/*.md` |
 | Adapter | `.codex/**`, `.opencode/**` |
 
 ### 2.2 Was ausdrücklich nicht gemessen wird
@@ -144,7 +144,7 @@ Sortiert nach Verhältnis aus **Signalwert / Implementierungsaufwand**.
 | 5 | Dokumentations- und Code-Rubrics | Mittel | Hoch | Ja | Liefert strukturierte Qualitätskategorien statt Bauchgefühl. |
 | 6 | Hook-basierter Eval-Modus | Mittel | Hoch | Ja, nach MVP | SampleProject hat bereits Hooks. Damit lassen sich Tool-Calls, Stop-Verhalten und Verifikationsnachweise erfassen. |
 | 7 | OTel/Debug-Export-Auswertung | Mittel | Hoch | Ja, aber nach lokalen JSON-Reports | Sehr wertvoll für Token, Tool-Calls, Latenz, aber nicht für Tag 1 nötig. |
-| 8 | CI-Smoke-Gate | Mittel | Mittel–hoch | Ja, nach stabiler lokaler Suite | Verhindert Regressionen bei `.github/**`, `clasp/**`, `.opencode/**`, `.codex/**`. |
+| 8 | CI-Smoke-Gate | Mittel | Mittel–hoch | Ja, nach stabiler lokaler Suite | Verhindert Regressionen bei `.github/**`, `agent-harness/**`, `.opencode/**`, `.codex/**`. |
 | 9 | Mehrfach-Trials + statistische Auswertung | Mittel | Mittel–hoch | Später | Wichtig wegen Nichtdeterminismus, aber erst sinnvoll, wenn Tasks stabil sind. |
 | 10 | Trace-Graph-/Dominator-Analyse | Hoch | Hoch bei UI/Computer-Use | Nicht MVP | Für SampleProject aktuell zu schwergewichtig. Optional für spätere Agent-Trace-Analyse. |
 | 11 | AgentEval-/DAG-Failure-Attribution | Hoch | Hoch | Nicht MVP | Gut für große Trace-Korpora, aber nicht für den Start. |
@@ -351,7 +351,7 @@ Nur ausführen, wenn relevante Dateien geändert wurden.
 | `sampleproject-web/src/**` | `cd sampleproject-web && eslint src/` |
 | `sampleproject-web/src/**` | `cd sampleproject-web && tsc --noEmit` |
 | `sampleproject-web/src/**` | `cd sampleproject-web && npm test -- --run` |
-| `.github/**` | `scripts\verify-clasp-freshness.ps1 -Lint` |
+| `.github/**` | `scripts\verify-agent-harness-freshness.ps1 -Lint` |
 | `.github/context/**` | `scripts\verify-context-freshness.ps1` |
 
 #### 2.3 Minimaler Python-Pseudocode
@@ -375,7 +375,7 @@ def score_trial(task, output_path, changed_files):
         result["tsc"] = run("cd sampleproject-web && tsc --noEmit")
 
     if touches_github_layer(changed_files):
-        result["clasp_freshness"] = run_powershell("scripts\\verify-clasp-freshness.ps1 -Lint")
+        result["agent_harness_freshness"] = run_powershell("scripts\\verify-agent-harness-freshness.ps1 -Lint")
         result["context_freshness"] = run_powershell("scripts\\verify-context-freshness.ps1")
 
     return result
@@ -894,7 +894,7 @@ Trigger-Pfade:
 .github/schemas/**
 AGENTS.md
 */AGENTS.md
-clasp/rules/**
+agent-harness/rules/**
 .codex/**
 .opencode/**
 ```

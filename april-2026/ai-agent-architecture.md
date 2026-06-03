@@ -408,7 +408,7 @@ The complete `.github/` directory structure is organized as follows:
 - Split `AI ecosystem-governance.instructions.md` into runtime (always-on, `applyTo: "**"`) + authoring (scoped to `.github/**`)
 - Deleted `session-today.instructions.md` (obsolete — replaced by VS Code memory system)
 - Created `session.save.prompt.md` for curating conversation learnings into persistent memory
-- Full ecosystem audit: fixed missing prompt frontmatter, narrowed over-broad `applyTo` scopes for stack instructions, relocated repo-specific prompt to `divical-api/prompts/`
+- Full ecosystem audit: fixed missing prompt frontmatter, narrowed over-broad `applyTo` scopes for stack instructions, relocated repo-specific prompt to `the-project-api/prompts/`
 - Documented Explore subagent (VS Code built-in) in agent roster
 - Archived 5 dead-weight files from v1 consolidation
 

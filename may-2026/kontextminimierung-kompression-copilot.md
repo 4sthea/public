@@ -1,4 +1,4 @@
-# Kontextminimierung und Kompression für Copilot in VS Code bei DiviCal
+# Kontextminimierung und Kompression für Copilot in VS Code bei the project
 
 ## Urteil
 
@@ -6,7 +6,7 @@
 
 **Meine Bewertung:** Für dein beschriebenes Setup ist ein lokaler Repository-MCP-Server **nicht der erste Hebel**. Der erste Hebel ist: kleine immer-geladene Instruktionen, selektive Dateireferenzen, Memory für Fakten statt Wiederholung, Skills mit isoliertem Kontext, Prompt Files mit begrenzter Toolliste, und bei langen Sessions bewusst Kompaktierung statt unendlicher Chat-Historie. Ein MCP-Server lohnt sich erst dann wirklich, wenn er **abgeleitete Metadaten** liefern kann, die Copilot aus Code-Suche und Dateilesen nicht effizient selbst gewinnt, etwa Ownership, Modulgraphen, Test-Impact, Deploy-Metadaten oder Domänenzusammenfassungen. Das ist eine **Ableitung** aus den Copilot-/MCP-Dokumenten und aus der SWE-Kontextkompressionsforschung, nicht ein wörtliches GitHub-Zitat. citeturn22view3turn21view0turn31view0turn31view3
 
-**Wichtige Grenze:** Den Inhalt des von dir genannten Repositories `4sthea/Divical` konnte ich über die öffentlich erreichbare GitHub-Weboberfläche nicht verifizieren; die öffentliche Seitenabfrage lieferte kein erreichbares Repository zurück. Deshalb sind die DiviCal-Empfehlungen unten bewusst **repo-agnostisch** und auf belastbare Copilot-/VS-Code-Mechaniken gestützt, nicht auf unprüfbare Aussagen über konkrete Dateien oder Architektur in deinem Repo. citeturn4view0
+**Wichtige Grenze:** Den Inhalt des von dir genannten Repositories `4sthea/the project` konnte ich über die öffentlich erreichbare GitHub-Weboberfläche nicht verifizieren; die öffentliche Seitenabfrage lieferte kein erreichbares Repository zurück. Deshalb sind die the project-Empfehlungen unten bewusst **repo-agnostisch** und auf belastbare Copilot-/VS-Code-Mechaniken gestützt, nicht auf unprüfbare Aussagen über konkrete Dateien oder Architektur in deinem Repo. citeturn4view0
 
 ## Was Copilot bereits nativ effizient macht
 
@@ -26,7 +26,7 @@ Für **reinen Repository-Kontext** ist MCP aber oft überflüssig, weil Copilot 
 
 Praktisch heißt das: Ein lokaler MCP-Server ist dann gut, wenn er **verdichtetes, berechnetes Wissen** liefert, zum Beispiel `get_module_graph()`, `get_test_impact(path)`, `get_repo_facts()`, `get_owners(path)` oder `summarize_changed_surface()`. Ein MCP-Server ist **schlecht**, wenn er nur ein Repo-Map-Dump oder große Textwände ausspuckt, die du auch als Datei, Hook oder Skill laden könntest. Das ist meine **Bewertung auf Basis** der Dokumentation und nicht direkt aus einer einzigen Quelle zitiert. Die Quellen belegen aber klar, dass Copilot bereits Repository-Suche kann und dass zu viele Tools bzw. instabile Toolsets Token- und Auswahlkosten erhöhen. citeturn16view5turn22view3turn25view0
 
-Wenn du MCP nutzt, dann minimalistisch. GitHub empfiehlt beim GitHub-MCP-Server das Aktivieren nur der benötigten Toolsets; das verbessert laut Doku Performance und Sicherheit und spart Kontextfenster. Genau dieselbe Denkweise solltest du auf einen lokalen DiviCal-spezifischen MCP anwenden. citeturn22view3
+Wenn du MCP nutzt, dann minimalistisch. GitHub empfiehlt beim GitHub-MCP-Server das Aktivieren nur der benötigten Toolsets; das verbessert laut Doku Performance und Sicherheit und spart Kontextfenster. Genau dieselbe Denkweise solltest du auf einen lokalen the project-spezifischen MCP anwenden. citeturn22view3
 
 ## Was ohne MCP am besten funktioniert
 
@@ -38,7 +38,7 @@ Für umfangreiche, nur manchmal nötige Prozesslogik sind **Skills** der richtig
 
 Für „temporäre Dateien“, „Memory-Files“ oder laufende Arbeitshypothesen brauchst du ebenfalls keinen MCP-Server. VS Code hat einen lokalen Memory-Mechanismus mit User-, Repository- und Session-Scope; Session-Memory wird nach Chat-Ende verworfen, Repository-Memory bleibt workspace-spezifisch erhalten, und der Plan-Agent schreibt seinen Plan in `/memories/session/plan.md`. Das ist im Grunde schon die offizielle, eingebaute Form deines „temporäre Dateien“-Gedankens. Zusätzlich können Hooks bei `SessionStart` und `SubagentStart` Kontext injizieren oder bei `PreToolUse`/`PostToolUse` Inhalte verändern bzw. validieren. Dadurch kannst du pro Session automatisiert eine knappe `repo-facts.md`-artige Verdichtung erzeugen, ohne einen MCP-Server zu bauen. citeturn17view0turn17view3turn18view0turn18view2turn18view3turn18view4turn34view4
 
-Eine sinnvolle Minimalstruktur für dein DiviCal-Setup sähe daher eher so aus:
+Eine sinnvolle Minimalstruktur für dein the project-Setup sähe daher eher so aus:
 
 ```text
 .github/copilot-instructions.md              # nur Invarianten, sehr kurz
@@ -69,9 +69,9 @@ Für **Code- und SWE-Agenten** ist die Lage noch schärfer. Eine neue empirische
 
 Die Praxis-Community passt grob dazu. Auf Reddit berichten Nutzer sichtbare Einsparungen durch Caveman-Stil und sehen das Umschreiben persistenter Kontextdateien als besonders nützlich; gleichzeitig gibt es Skepsis, ob solche Stilzwänge Qualitätsverluste bringen oder nur sichtbaren Output verkürzen, während verborgenes Denken unangetastet bleibt. Diese Community-Signale sind kein Primärbeweis, aber sie passen zu dem, was Caveman selbst schreibt und was offizielle API-Dokumente über Output-Caps versus echte Sparmechanismen sagen. citeturn26search0turn26search6turn26search12turn26search15turn26search18
 
-## Empfehlung für DiviCal
+## Empfehlung für the project
 
-Da ich den konkreten DiviCal-Code nicht verifizieren konnte, ist meine Empfehlung bewusst als **robuste Standardarchitektur für ein produktives Copilot-Setup** formuliert, nicht als Aussagen über konkrete Module in deinem Repo. citeturn4view0
+Da ich den konkreten the project-Code nicht verifizieren konnte, ist meine Empfehlung bewusst als **robuste Standardarchitektur für ein produktives Copilot-Setup** formuliert, nicht als Aussagen über konkrete Module in deinem Repo. citeturn4view0
 
 **Meine klare Empfehlung** für dich wäre, zuerst eine **MCP-freie Basisarchitektur** aufzubauen. Halte `.github/copilot-instructions.md` extrem kurz: Build-/Test-Commands, eine Handvoll Architektur-Invarianten, Naming- und Safety-Regeln. Alles andere wandert in pfad-spezifische `.instructions.md`-Dateien, Prompt Files und wenige Skills. Nimm nur so viele Skills, wie du wirklich wiederverwendbare, klar unterscheidbare Workflows hast; typischerweise reichen in deinem Fall wahrscheinlich drei bis fünf gute Skills deutlich besser als zwanzig halbgare. Das ist mit den offiziellen Empfehlungen von GitHub konsistent, wonach Custom Instructions für ständig relevante einfache Regeln und Skills für detaillierte, nur bei Bedarf geladene Logik gedacht sind. citeturn39view0turn34view1turn24view2
 
@@ -79,10 +79,10 @@ Für die von dir genannte Idee „temporäre Dateien statt MCP“ würde ich **j
 
 **Caveman oder ähnliche Stilkompression** würde ich in deinem Setup nur selektiv einsetzen: gut für Ergebnis-Summaries, Analyseberichte, Research-Outputs, TL;DRs und das Verdichten von menschenverfassten Kontextdateien wie `AGENTS.md`, Projektbriefings oder Notes. Ich würde Caveman **nicht** als Standardstil für Implementierungs-Subagenten erzwingen, wenn diese präzise Änderungsschritte, Migrationshinweise, Testbegründungen oder Diff-Erklärungen liefern sollen. Dort ist knappe Struktur besser als „caveman style“: zum Beispiel feste Abschnitte oder JSON-artige Kurzform. Das folgt sowohl aus Cavemans eigener Einschränkung auf Output-Stil als auch aus der SWE-Kompressionsliteratur, die nur dann gute Resultate zeigt, wenn taskkritische Information sicher erhalten bleibt. citeturn15view0turn31view3turn31view7
 
-**Einen lokalen MCP-Server** würde ich für DiviCal erst in einer zweiten Ausbaustufe bauen, und dann sehr schmal. Kein allgemeiner Repo-Explorer. Stattdessen drei bis fünf hochspezialisierte Funktionen, die echte verdichtete Domänen- oder Repo-Metadaten liefern. Wenn dein „Clasp“-Teil in DiviCal zum Beispiel deployment- oder integrationslastig ist, dann wäre ein MCP-Server vertretbar, der genau solche Metadaten extrahiert und nicht einfach Massen an Text zurückgibt. Wenn du diese Verdichtung auch per Hook/Script/Prompt File hinbekommst, würde ich MCP sogar dann noch weglassen, weil es mehr Betrieb, Fehlersuche und Sicherheitsoberfläche mitbringt. Diese Schlussfolgerung ist eine klare **Bewertung**, gestützt auf die offiziellen MCP-/Toolset-Dokumente und auf den bereits vorhandenen nativen Copilot-Funktionsumfang. citeturn21view0turn22view3turn16view5turn25view0
+**Einen lokalen MCP-Server** würde ich für the project erst in einer zweiten Ausbaustufe bauen, und dann sehr schmal. Kein allgemeiner Repo-Explorer. Stattdessen drei bis fünf hochspezialisierte Funktionen, die echte verdichtete Domänen- oder Repo-Metadaten liefern. Wenn dein „Agent Harness“-Teil in the project zum Beispiel deployment- oder integrationslastig ist, dann wäre ein MCP-Server vertretbar, der genau solche Metadaten extrahiert und nicht einfach Massen an Text zurückgibt. Wenn du diese Verdichtung auch per Hook/Script/Prompt File hinbekommst, würde ich MCP sogar dann noch weglassen, weil es mehr Betrieb, Fehlersuche und Sicherheitsoberfläche mitbringt. Diese Schlussfolgerung ist eine klare **Bewertung**, gestützt auf die offiziellen MCP-/Toolset-Dokumente und auf den bereits vorhandenen nativen Copilot-Funktionsumfang. citeturn21view0turn22view3turn16view5turn25view0
 
 ## Offene Fragen und Grenzen
 
-Die größte offene Stelle ist repo-spezifisch: Für `4sthea/Divical` konnte ich die öffentliche Repository-Struktur nicht prüfen. Dadurch kann ich **nicht verifizieren**, welche Teile deiner App wirklich von Hooks, Memory, Skills oder einem spezialisierten MCP am meisten profitieren würden. Ebenso konnte ich die von dir genannte Bezeichnung „Clasp“ in deinem DiviCal-Kontext nicht anhand des Repos selbst auflösen; deshalb habe ich absichtlich keine unprüfbaren Aussagen über diesen Teil der Architektur gemacht. citeturn4view0
+Die größte offene Stelle ist repo-spezifisch: Für `4sthea/the project` konnte ich die öffentliche Repository-Struktur nicht prüfen. Dadurch kann ich **nicht verifizieren**, welche Teile deiner App wirklich von Hooks, Memory, Skills oder einem spezialisierten MCP am meisten profitieren würden. Ebenso konnte ich die von dir genannte Bezeichnung „Agent Harness“ in deinem the project-Kontext nicht anhand des Repos selbst auflösen; deshalb habe ich absichtlich keine unprüfbaren Aussagen über diesen Teil der Architektur gemacht. citeturn4view0
 
 Die Empfehlung zu **schema-basierten strukturierten Ausgaben** gilt belastbar für eigene Harnesses oder API-basierte Subagenten, weil OpenAI dafür offizielle Structured Outputs dokumentiert. Ob die aktuelle Copilot-Oberfläche in deinem konkreten Setup dafür schon überall einen gleichwertigen First-Class-Schalter anbietet, habe ich hier nicht als verifizierten Produktsachstand festgestellt. Was aber gesichert ist: klare, knappe Ergebnisverträge, geringe Toolmengen, isolierte Skill-Kontexte und kleine Always-on-Instruktionen sind heute schon die wartbarste und tokeneffizienteste Richtung. citeturn23view1turn24view2turn39view4
