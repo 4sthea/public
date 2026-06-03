@@ -1,0 +1,43 @@
+{
+  "id": "cap-trace-001-essential-state-checker-design",
+  "category": "trace_quality",
+  "title": "Design a lightweight essential-state checker",
+  "priority": "capability",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/cap-trace-001-essential-state-checker-design/t{trial}/output.md",
+  "context_files": [],
+  "prompt": "Design a lightweight essential-state checker for the project eval traces.\n\nKeep it much simpler than full dominator analysis. Use milestone subsequence matching: required milestones may have optional states between them, but must appear in order.",
+  "acceptance_criteria": [
+    "Uses essential milestones instead of exact trace matching.",
+    "Allows optional states between milestones.",
+    "Defines JSON input/output.",
+    "Provides example pass and fail case.",
+    "Keeps MVP implementable with Python stdlib."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "Goal",
+      "Input Schema",
+      "Algorithm",
+      "Pass Example",
+      "Fail Example"
+    ],
+    "required_strings": [
+      "milestone",
+      "subsequence",
+      "optional",
+      "Python stdlib",
+      "in order"
+    ],
+    "forbidden_strings": [
+      "pixel-perfect",
+      "exact trace equality",
+      "large-scale model training required"
+    ],
+    "min_word_count": 350,
+    "max_word_count": 1300,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

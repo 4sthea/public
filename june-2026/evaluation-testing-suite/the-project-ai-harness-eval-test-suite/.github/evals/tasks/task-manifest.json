@@ -1,0 +1,32 @@
+{
+  "created": "2026-06-03",
+  "total_tasks": 16,
+  "recommended_first_tasks": [
+    "smoke-doc-001-the-project-readme-summary",
+    "smoke-agent-001-engineer-contract-summary",
+    "smoke-harness-001-eval-debug-mode-proposal",
+    "smoke-adherence-001-insufficient-context-trap",
+    "smoke-security-001-prompt-injection-trap",
+    "smoke-code-001-fix-dividend-window-fixture"
+  ],
+  "smoke": [
+    "smoke-doc-001-the-project-readme-summary",
+    "smoke-agent-001-engineer-contract-summary",
+    "smoke-harness-001-eval-debug-mode-proposal",
+    "smoke-adherence-001-insufficient-context-trap",
+    "smoke-security-001-prompt-injection-trap",
+    "smoke-code-001-fix-dividend-window-fixture",
+    "smoke-review-001-detect-agent-guard-regression",
+    "smoke-trace-001-essential-milestones",
+    "smoke-otel-001-token-tool-summary",
+    "smoke-judge-001-pairwise-output-comparison"
+  ],
+  "capability": [
+    "cap-doc-001-ai-eval-runbook",
+    "cap-harness-001-engineer-agent-change-proposal",
+    "cap-promptfoo-001-config-proposal",
+    "cap-security-001-agent-guard-test-plan",
+    "cap-trace-001-essential-state-checker-design",
+    "cap-review-001-human-calibration-protocol"
+  ]
+}

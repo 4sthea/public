@@ -1,0 +1,42 @@
+{
+  "id": "cap-harness-001-engineer-agent-change-proposal",
+  "category": "agent_contract",
+  "title": "Propose a safe Engineer Agent instruction change",
+  "priority": "capability",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/cap-harness-001-engineer-agent-change-proposal/t{trial}/output.md",
+  "context_files": [],
+  "prompt": "Propose one small change to the Engineer Agent instructions that should improve eval performance without increasing token usage too much.\n\nDo not edit files. Output a patch-style proposal plus the specific eval tasks that should catch regressions.",
+  "acceptance_criteria": [
+    "Change is small and testable.",
+    "Explains expected behavioral effect.",
+    "Lists possible regression risk.",
+    "Maps change to concrete eval tasks.",
+    "Includes rollback condition."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "Proposed Change",
+      "Expected Effect",
+      "Regression Risk",
+      "Eval Tasks",
+      "Rollback Condition"
+    ],
+    "required_strings": [
+      "Engineer Agent",
+      "eval",
+      "regression",
+      "rollback"
+    ],
+    "forbidden_strings": [
+      "rewrite everything",
+      "increase context massively",
+      "disable verification"
+    ],
+    "min_word_count": 250,
+    "max_word_count": 1000,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

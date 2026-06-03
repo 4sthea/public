@@ -1,0 +1,54 @@
+{
+  "id": "smoke-doc-001-the-project-readme-summary",
+  "category": "documentation",
+  "title": "Summarize the project from README evidence",
+  "priority": "smoke",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/smoke-doc-001-the-project-readme-summary/t{trial}/output.md",
+  "context_files": [
+    ".github/evals/fixtures/docs/the-project_readme_excerpt.md"
+  ],
+  "prompt": "Read `.github/evals/fixtures/docs/the-project_readme_excerpt.md` and create a concise Markdown summary of the project.\n\nYou must label each factual section as `FACT:` and explicitly state the verification boundary. Do not use external knowledge. Do not infer technologies that are not in the excerpt.",
+  "acceptance_criteria": [
+    "Explains the project purpose.",
+    "Mentions both active codebases and their stacks.",
+    "Mentions Agent Harness governance.",
+    "Mentions Agent Guard prompt-injection defense.",
+    "Includes a verification boundary or assumption section.",
+    "Does not invent unprovided technologies or providers."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "FACT: Purpose",
+      "FACT: Active Codebases",
+      "FACT: Key Capabilities",
+      "FACT: AI Governance"
+    ],
+    "required_strings": [
+      "the project",
+      "the-project-api",
+      "the-project-web",
+      "Python 3.12",
+      "FastAPI",
+      "React 18",
+      "TypeScript",
+      "Vite",
+      "Agent Harness",
+      "Agent Guard"
+    ],
+    "forbidden_strings": [
+      ".NET",
+      "C#",
+      "Angular",
+      "Binance",
+      "crypto futures",
+      "fully verified"
+    ],
+    "min_word_count": 120,
+    "max_word_count": 650,
+    "must_include_evidence_labels": true,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

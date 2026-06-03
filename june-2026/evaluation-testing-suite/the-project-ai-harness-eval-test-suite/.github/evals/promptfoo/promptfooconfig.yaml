@@ -1,0 +1,54 @@
+# Optional Promptfoo configuration for semantic/rubric evals.
+# This is optional. The stdlib Python scripts in scripts/ work without Promptfoo.
+# Requires promptfoo installed and provider credentials configured.
+
+prompts:
+  - file://../prompts/run-task-template.md
+
+providers:
+  # Replace with your preferred judge/provider.
+  # Keep grader fixed for before/after comparisons.
+  - openai:gpt-5
+
+defaultTest:
+  options:
+    provider:
+      id: openai:gpt-5-mini
+      config:
+        temperature: 0
+  assert:
+    - type: llm-rubric
+      threshold: 0.8
+      value: |
+        The output must satisfy the task acceptance criteria, avoid hallucinated repository facts,
+        preserve required scope, and explicitly label uncertainty when evidence is missing.
+
+tests:
+  - description: the project README summary smoke task
+    vars:
+      task_id: smoke-doc-001-the-project-readme-summary
+      variant: baseline
+      trial: 1
+      output_path: docs/tmp/ai-evals/runs/promptfoo/baseline/smoke-doc-001/t01/output.md
+      task_prompt: |
+        Read .github/evals/fixtures/docs/the-project_readme_excerpt.md and summarize the project.
+      acceptance_criteria: |
+        Must mention the project, the-project-api, the-project-web, Python/FastAPI, React/TypeScript/Vite, Agent Harness, Agent Guard.
+      deterministic_checks: |
+        Forbidden: .NET, C#, Angular, Binance, crypto futures.
+
+  - description: Pairwise select-best demonstration
+    vars:
+      task_id: smoke-doc-001-the-project-readme-summary
+      variant: comparison
+      trial: 1
+      output_path: docs/tmp/ai-evals/runs/promptfoo/comparison/output.md
+      task_prompt: |
+        Compare sample outputs under fixtures/outputs.
+      acceptance_criteria: |
+        Correctly prefer candidate-better or baseline-good over candidate-regression.
+      deterministic_checks: |
+        Candidate-regression contains known hallucinations.
+    assert:
+      - type: select-best
+        value: choose the output that is most factually grounded in the provided README excerpt and contains the fewest hallucinations

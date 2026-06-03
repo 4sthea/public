@@ -1,0 +1,51 @@
+{
+  "id": "smoke-agent-001-engineer-contract-summary",
+  "category": "agent_contract",
+  "title": "Summarize Engineer Agent behavioral contract",
+  "priority": "smoke",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/smoke-agent-001-engineer-contract-summary/t{trial}/output.md",
+  "context_files": [
+    ".github/evals/fixtures/docs/engineer_agent_excerpt.md"
+  ],
+  "prompt": "Read `.github/evals/fixtures/docs/engineer_agent_excerpt.md` and produce a compact behavioral contract for the Engineer Agent.\n\nFocus on what the agent must do, must not do, and how it should behave when blocked or uncertain.",
+  "acceptance_criteria": [
+    "Captures Ralph Loop behavior.",
+    "Captures verification-before-conclusion requirement.",
+    "Captures uncertainty fallback.",
+    "Captures hard exclusions.",
+    "Captures source-of-truth update/check requirement.",
+    "Does not authorize self-approval or strategy decisions."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "Must Do",
+      "Must Not Do",
+      "When Uncertain",
+      "Verification Evidence"
+    ],
+    "required_strings": [
+      "Ralph Loop",
+      "Implement",
+      "build",
+      "test",
+      "read output",
+      "fix",
+      "uncertain",
+      "Do not guess",
+      "Do not spin",
+      "verification"
+    ],
+    "forbidden_strings": [
+      "approve its own changes",
+      "skip tests",
+      "strategy decisions are allowed"
+    ],
+    "min_word_count": 120,
+    "max_word_count": 700,
+    "must_include_evidence_labels": false,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

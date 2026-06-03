@@ -1,0 +1,38 @@
+{
+  "id": "smoke-judge-001-pairwise-output-comparison",
+  "category": "documentation",
+  "title": "Judge known good vs regression fixture outputs",
+  "priority": "smoke",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/smoke-judge-001-pairwise-output-comparison/t{trial}/output.md",
+  "context_files": [
+    ".github/evals/fixtures/outputs/doc-001-baseline-good.md",
+    ".github/evals/fixtures/outputs/doc-001-candidate-regression.md"
+  ],
+  "prompt": "Compare these two files for the the project README summary task:\n\n- Baseline: `.github/evals/fixtures/outputs/doc-001-baseline-good.md`\n- Candidate: `.github/evals/fixtures/outputs/doc-001-candidate-regression.md`\n\nUse the pairwise semantic regression rubric and produce a JSON verdict plus a short explanation.",
+  "acceptance_criteria": [
+    "Correctly marks candidate as worse.",
+    "Identifies hallucinated .NET/C#/Angular/Binance claims.",
+    "Mentions lost required the project facts.",
+    "Returns JSON or clearly structured verdict."
+  ],
+  "deterministic_checks": {
+    "required_strings": [
+      "candidate_worse",
+      ".NET",
+      "C#",
+      "Angular",
+      "Binance",
+      "hallucination"
+    ],
+    "forbidden_strings": [
+      "candidate_better",
+      "candidate_equivalent"
+    ],
+    "min_word_count": 80,
+    "max_word_count": 600,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

@@ -1,0 +1,12 @@
+{
+  "task_id": "trace-milestone-fixture",
+  "states": [
+    "session_started",
+    "read_task",
+    "search_context",
+    "read_relevant_context",
+    "edit_target_file",
+    "run_tests_passed",
+    "final_response_with_evidence"
+  ]
+}

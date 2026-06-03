@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "the project AI Eval Comparison Report",
+  "type": "object",
+  "required": [
+    "task_id",
+    "baseline",
+    "candidate",
+    "verdict"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "baseline": {
+      "type": "object"
+    },
+    "candidate": {
+      "type": "object"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE"
+      ]
+    },
+    "deterministic_delta": {
+      "type": "object"
+    },
+    "semantic_judge_prompt": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

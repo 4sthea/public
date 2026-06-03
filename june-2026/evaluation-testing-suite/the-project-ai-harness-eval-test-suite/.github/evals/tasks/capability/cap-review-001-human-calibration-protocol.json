@@ -1,0 +1,41 @@
+{
+  "id": "cap-review-001-human-calibration-protocol",
+  "category": "review_quality",
+  "title": "Create human calibration protocol for LLM judges",
+  "priority": "capability",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/cap-review-001-human-calibration-protocol/t{trial}/output.md",
+  "context_files": [],
+  "prompt": "Create a human calibration protocol for the pairwise semantic judge.\n\nThe goal is to prevent blindly trusting LLM-as-judge outputs. Include sample size, disagreement handling, and when to update rubrics.",
+  "acceptance_criteria": [
+    "Mentions spot-checking model judge results.",
+    "Defines disagreement labels.",
+    "Defines when rubrics/tasks must be revised.",
+    "Includes a small calibration cadence."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "Goal",
+      "Cadence",
+      "Reviewer Checklist",
+      "Disagreement Handling",
+      "Rubric Update Policy"
+    ],
+    "required_strings": [
+      "spot-check",
+      "disagreement",
+      "calibration",
+      "rubric",
+      "human"
+    ],
+    "forbidden_strings": [
+      "never review judge outputs",
+      "judge is always correct"
+    ],
+    "min_word_count": 300,
+    "max_word_count": 1000,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

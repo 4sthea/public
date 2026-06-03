@@ -1,0 +1,44 @@
+{
+  "id": "cap-doc-001-ai-eval-runbook",
+  "category": "documentation",
+  "title": "Create a the project AI-eval runbook",
+  "priority": "capability",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/cap-doc-001-ai-eval-runbook/t{trial}/output.md",
+  "context_files": [],
+  "prompt": "Create a practical runbook for running before/after AI-harness evals in the project.\n\nInclude: task selection, baseline capture, candidate capture, deterministic scoring, pairwise judge, human calibration, and merge decision policy.",
+  "acceptance_criteria": [
+    "Includes end-to-end workflow.",
+    "Separates deterministic gates from LLM judge.",
+    "Defines pass/fail/inconclusive.",
+    "Includes non-determinism handling.",
+    "Keeps implementation lightweight."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "Scope",
+      "Workflow",
+      "Scoring",
+      "Pairwise Judge",
+      "Human Calibration",
+      "Merge Policy"
+    ],
+    "required_strings": [
+      "baseline",
+      "candidate",
+      "deterministic",
+      "pairwise",
+      "INCONCLUSIVE",
+      "trial"
+    ],
+    "forbidden_strings": [
+      "single run is enough",
+      "old output is gold truth"
+    ],
+    "min_word_count": 450,
+    "max_word_count": 1500,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

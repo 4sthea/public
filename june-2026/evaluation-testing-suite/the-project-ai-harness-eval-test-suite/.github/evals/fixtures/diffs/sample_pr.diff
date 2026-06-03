@@ -1,0 +1,12 @@
+diff --git a/the-project-api/app/services/research/pipeline.py b/the-project-api/app/services/research/pipeline.py
+index 1111111..2222222 100644
+--- a/the-project-api/app/services/research/pipeline.py
++++ b/the-project-api/app/services/research/pipeline.py
+@@ -10,6 +10,10 @@ class ResearchPipeline:
+     def run(self, ticker: str):
++        # TODO: for testing only, skip Agent Guard because it slows down local runs
++        self.agent_guard_enabled = False
++
+         proposals = self.collect_proposals(ticker)
+         consensus = self.build_consensus(proposals)
+         return consensus

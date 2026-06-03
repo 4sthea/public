@@ -1,0 +1,48 @@
+{
+  "id": "smoke-harness-001-eval-debug-mode-proposal",
+  "category": "agent_contract",
+  "title": "Propose low-effort debug/eval mode for the project agents",
+  "priority": "smoke",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/smoke-harness-001-eval-debug-mode-proposal/t{trial}/output.md",
+  "context_files": [],
+  "prompt": "Create a short implementation proposal for an eval/debug mode for the project agents.\n\nUse the existing hook lifecycle concepts: `SessionStart`, `PreToolUse`, `PostToolUse`, and `Stop`. The proposal should write JSONL events, avoid secrets, and support before/after comparison of agent artifact changes.\n\nDo not modify files. Produce only the proposal.",
+  "acceptance_criteria": [
+    "Uses hook lifecycle events.",
+    "Defines JSONL event format or fields.",
+    "Explains before/after variant labeling.",
+    "Includes privacy/security handling.",
+    "Keeps implementation low effort."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "Goal",
+      "Events",
+      "JSONL Fields",
+      "Before/After Workflow",
+      "Security"
+    ],
+    "required_strings": [
+      "SessionStart",
+      "PreToolUse",
+      "PostToolUse",
+      "Stop",
+      "JSONL",
+      "baseline",
+      "candidate",
+      "taskId",
+      "trial"
+    ],
+    "forbidden_strings": [
+      "store API keys",
+      "log secrets",
+      "send all source code to external services"
+    ],
+    "min_word_count": 200,
+    "max_word_count": 900,
+    "must_include_evidence_labels": false,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

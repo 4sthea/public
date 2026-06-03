@@ -1,0 +1,40 @@
+{
+  "id": "cap-promptfoo-001-config-proposal",
+  "category": "agent_contract",
+  "title": "Create optional Promptfoo config proposal",
+  "priority": "capability",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/cap-promptfoo-001-config-proposal/t{trial}/output.md",
+  "context_files": [],
+  "prompt": "Create a short proposal for using Promptfoo optionally with this eval suite.\n\nMention deterministic assertions, `llm-rubric`, `agent-rubric`, and `select-best`. Explain when **not** to use it.",
+  "acceptance_criteria": [
+    "Correctly positions Promptfoo as optional, not required.",
+    "Uses deterministic assertions first.",
+    "Uses LLM/agent rubrics only for semantic/repo-aware judgment.",
+    "Mentions cost and judge reliability limitations."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "When To Use",
+      "When Not To Use",
+      "Assertions",
+      "Risks"
+    ],
+    "required_strings": [
+      "deterministic",
+      "llm-rubric",
+      "agent-rubric",
+      "select-best",
+      "judge reliability"
+    ],
+    "forbidden_strings": [
+      "replace all tests",
+      "LLM judge is ground truth"
+    ],
+    "min_word_count": 250,
+    "max_word_count": 1000,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

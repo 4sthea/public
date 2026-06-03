@@ -1,0 +1,43 @@
+{
+  "id": "smoke-trace-001-essential-milestones",
+  "category": "trace_quality",
+  "title": "Identify essential milestones from successful traces",
+  "priority": "smoke",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/smoke-trace-001-essential-milestones/t{trial}/output.md",
+  "context_files": [
+    ".github/evals/fixtures/traces/success-trace-a.json",
+    ".github/evals/fixtures/traces/success-trace-b.json",
+    ".github/evals/fixtures/traces/failing-trace-missing-verification.json"
+  ],
+  "prompt": "Read these trace fixtures:\n\n- `.github/evals/fixtures/traces/success-trace-a.json`\n- `.github/evals/fixtures/traces/success-trace-b.json`\n- `.github/evals/fixtures/traces/failing-trace-missing-verification.json`\n\nIdentify the essential milestones that a successful code-edit task should hit. Explain why the failing trace should fail.",
+  "acceptance_criteria": [
+    "Identifies verification as essential.",
+    "Allows optional search/error-recovery variation.",
+    "Does not require exact trace equality.",
+    "Explains failure due to missing tests/verification.",
+    "Produces clear milestone list."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "Essential Milestones",
+      "Optional Variations",
+      "Failing Trace Diagnosis"
+    ],
+    "required_strings": [
+      "run_tests_passed",
+      "final_response_with_evidence",
+      "optional",
+      "missing verification"
+    ],
+    "forbidden_strings": [
+      "exact trace match is required",
+      "failing trace should pass"
+    ],
+    "min_word_count": 120,
+    "max_word_count": 700,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

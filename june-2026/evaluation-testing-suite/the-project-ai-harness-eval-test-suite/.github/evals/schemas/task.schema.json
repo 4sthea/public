@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "the project AI Eval Task",
+  "type": "object",
+  "required": [
+    "id",
+    "category",
+    "title",
+    "variant_safe_output_path",
+    "prompt",
+    "acceptance_criteria",
+    "deterministic_checks"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "smoke",
+        "capability",
+        "regression"
+      ]
+    },
+    "agent": {
+      "type": "string"
+    },
+    "variant_safe_output_path": {
+      "type": "string"
+    },
+    "context_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "deterministic_checks": {
+      "type": "object",
+      "properties": {
+        "required_headings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required_strings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required_regex": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbidden_strings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "forbidden_regex": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "min_word_count": {
+          "type": "integer"
+        },
+        "max_word_count": {
+          "type": "integer"
+        },
+        "must_include_evidence_labels": {
+          "type": "boolean"
+        },
+        "must_not_claim_unverified_repo_facts": {
+          "type": "boolean"
+        },
+        "validation_commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowed_modified_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expected_created_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "pairwise_rubric": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,46 @@
+{
+  "id": "smoke-otel-001-token-tool-summary",
+  "category": "trace_quality",
+  "title": "Summarize OTel sample into useful metrics",
+  "priority": "smoke",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/smoke-otel-001-token-tool-summary/t{trial}/output.md",
+  "context_files": [
+    ".github/evals/fixtures/otel/copilot-otel-sample.jsonl"
+  ],
+  "prompt": "Read `.github/evals/fixtures/otel/copilot-otel-sample.jsonl`.\n\nProduce a small metrics summary: agent name, model, input/output tokens, tool calls, edited file path, and verification command. Do not claim this is a complete production trace.",
+  "acceptance_criteria": [
+    "Extracts basic token metrics.",
+    "Counts tool calls.",
+    "Names edited fixture path.",
+    "Names verification command.",
+    "States trace boundary/limitation."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "Metrics",
+      "Tool Calls",
+      "Verification Evidence",
+      "Limitations"
+    ],
+    "required_strings": [
+      "Engineer",
+      "gpt-5.5",
+      "8200",
+      "2100",
+      "readFile",
+      "editFiles",
+      "runCommand",
+      "dividend_window.py"
+    ],
+    "forbidden_strings": [
+      "complete production trace",
+      "all tasks passed"
+    ],
+    "min_word_count": 100,
+    "max_word_count": 600,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}

@@ -1,0 +1,48 @@
+{
+  "id": "smoke-code-001-fix-dividend-window-fixture",
+  "category": "code_fixture",
+  "title": "Fix signed ex-date offset fixture",
+  "priority": "smoke",
+  "agent": "Engineer",
+  "variant_safe_output_path": "docs/tmp/ai-evals/runs/manual/{variant}/smoke-code-001-fix-dividend-window-fixture/t{trial}/output.md",
+  "context_files": [
+    ".github/evals/fixtures/python/dividend_window.py",
+    ".github/evals/fixtures/python/test_dividend_window.py"
+  ],
+  "prompt": "Fix the controlled Python fixture `.github/evals/fixtures/python/dividend_window.py` so all tests in `.github/evals/fixtures/python/test_dividend_window.py` pass.\n\nConstraints:\n- Modify only `.github/evals/fixtures/python/dividend_window.py` unless you find a test bug.\n- Do not change the public function names.\n- Run the fixture tests using: `python scripts/ai_eval_run_fixture_tests.py`.\n- In your final output, include a short summary and exact verification command/result.",
+  "acceptance_criteria": [
+    "Fixes the absolute-value sign bug.",
+    "Preserves public function names.",
+    "Does not change tests unless justified.",
+    "Runs fixture tests and reports command/result.",
+    "Keeps scope to fixture files."
+  ],
+  "deterministic_checks": {
+    "required_headings": [
+      "Summary",
+      "Files Changed",
+      "Verification"
+    ],
+    "required_strings": [
+      "dividend_window.py",
+      "python scripts/ai_eval_run_fixture_tests.py"
+    ],
+    "forbidden_strings": [
+      "skipped tests",
+      "could not run but assumed",
+      "changed production code"
+    ],
+    "min_word_count": 80,
+    "max_word_count": 500,
+    "validation_commands": [
+      "python scripts/ai_eval_run_fixture_tests.py"
+    ],
+    "allowed_modified_paths": [
+      ".github/evals/fixtures/python/dividend_window.py"
+    ],
+    "must_include_evidence_labels": false,
+    "must_not_claim_unverified_repo_facts": true
+  },
+  "pairwise_rubric": "Use .github/evals/rubrics/semantic-regression-pairwise.rubric.md plus the task-specific acceptance criteria.",
+  "notes": ""
+}
